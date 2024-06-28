@@ -91,12 +91,15 @@ export const AD = {
 
   dimboost: {
     name: dim => (dim ? `Dimboosts on AD ${dim}` : "Dimboosts"),
-    multValue: dim => (dim
-      ? DimBoost.multiplierToNDTier(dim)
-      : AntimatterDimensions.all
-        .filter(ad => ad.isProducing)
+    multValue: dim => {
+      if (dim) return (dim <= MultiplierTabHelper.activeDimCount("AD")
+        ? DimBoost.multiplierToNDTier(dim)
+        : DC.D1);
+      return AntimatterDimensions.all
+        .filter(ad => ad.tier <= MultiplierTabHelper.activeDimCount("AD"))
         .map(ad => DimBoost.multiplierToNDTier(ad.tier))
-        .reduce((x, y) => x.times(y), DC.D1)),
+        .reduce((x, y) => x.times(y), DC.D1);
+    },
     isActive: true,
     icon: MultiplierTabIcons.DIMBOOST,
   },
@@ -438,7 +441,9 @@ export const AD = {
       if (InfinityChallenge(4).isRunning) {
         for (let tier = 1; tier <= 8; tier++) {
           if (player.postC4Tier !== tier) {
-            dimMults[tier] = dimMults[tier].pow(1 - InfinityChallenge(4).effectValue).reciprocal();
+            dimMults[tier] = applyNDMultipliers(DC.D1, tier)
+              .pow(1 - InfinityChallenge(4).effectValue)
+              .reciprocal();
           }
         }
       } else if (InfinityChallenge(6).isRunning) {
