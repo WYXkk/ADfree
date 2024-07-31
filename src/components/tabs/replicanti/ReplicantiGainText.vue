@@ -113,13 +113,23 @@ export default {
           const pending = Replicanti.galaxies.gain;
           let pendingTime = pending * secondsPerGalaxy.toNumber();
           // If popular music is unlocked add the divide amount
-          if (Achievement(126).isUnlocked && !Pelle.isDoomed) {
+          if (Replicanti.galaxies.isFree) {
             const leftPercentAfterGalaxy = replicantiAmount.log10() / LOG10_MAX_VALUE - pending;
             pendingTime += leftPercentAfterGalaxy * secondsPerGalaxy.toNumber();
           }
           const thisGalaxyTime = pending > 0 ? pendingTime : secondsPerGalaxy.toNumber() - remainingTime;
           this.galaxyText += ` (all Replicanti Galaxies within
             ${TimeSpan.fromSeconds(Math.clampMin(allGalaxyTime - thisGalaxyTime, 0))})`;
+
+          if(Replicanti.galaxies.isFree) {
+            this.galaxyText = "You can get all Replicanti Galaxies for free ";
+            if(Replicanti.amount.gte(Number.MAX_VALUE)) {
+              this.galaxyText += "now";
+            } else {
+              this.galaxyText += "after Infinite Replicanti";
+            }
+          }
+          // handle when galaxy is free -- ADfree
         }
       } else {
         this.galaxyText = ``;

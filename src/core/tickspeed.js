@@ -73,7 +73,8 @@ export function buyTickSpeed() {
     Tickspeed.multiplySameCosts();
   }
   Tutorial.turnOffEffect(TUTORIAL_STATE.TICKSPEED);
-  Currency.antimatter.subtract(Tickspeed.cost);
+  // Currency.antimatter.subtract(Tickspeed.cost);
+  // Cost removed -- ADfree
   player.totalTickBought++;
   player.records.thisInfinity.lastBuyTime = player.records.thisInfinity.time;
   player.requirementChecks.permanent.singleTickspeed++;
@@ -92,7 +93,8 @@ export function buyMaxTickSpeed() {
     let cost = Tickspeed.cost;
     while (Currency.antimatter.gt(cost) && cost.lt(goal)) {
       Tickspeed.multiplySameCosts();
-      Currency.antimatter.subtract(cost);
+      // Currency.antimatter.subtract(cost);
+      // Cost removed -- ADfree
       player.totalTickBought++;
       boughtTickspeed = true;
       cost = Tickspeed.cost;
@@ -102,7 +104,8 @@ export function buyMaxTickSpeed() {
     if (purchases === null) {
       return;
     }
-    Currency.antimatter.subtract(Decimal.pow10(purchases.logPrice));
+    // Currency.antimatter.subtract(Decimal.pow10(purchases.logPrice));
+    // Cost removed -- ADfree
     player.totalTickBought += purchases.quantity;
     boughtTickspeed = true;
   }

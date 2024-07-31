@@ -50,7 +50,8 @@ export class RebuyableMechanicState extends GameMechanicState {
   purchase() {
     if (!this.canBeBought) return false;
     if (GameEnd.creditsEverClosed) return false;
-    this.currency.subtract(this.cost);
+    // this.currency.subtract(this.cost);
+    // Cost removed -- ADfree
     this.boughtAmount++;
     this.onPurchased();
     GameUI.update();

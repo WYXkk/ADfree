@@ -181,7 +181,8 @@ class InfinityIPMultUpgrade extends GameMechanicState {
     if (!TimeStudy(181).isBought) {
       Autobuyer.bigCrunch.bumpAmount(DC.D2.pow(amount));
     }
-    Currency.infinityPoints.subtract(Decimal.sumGeometricSeries(amount, this.cost, this.costIncrease, 0));
+    // Currency.infinityPoints.subtract(Decimal.sumGeometricSeries(amount, this.cost, this.costIncrease, 0));
+    // Cost Removed -- ADfree
     player.IPMultPurchases += amount;
     GameUI.update();
   }
@@ -191,7 +192,9 @@ class InfinityIPMultUpgrade extends GameMechanicState {
     if (!this.hasIncreasedCost) {
       // Only allow IP below the softcap to be used
       const availableIP = Currency.infinityPoints.value.clampMax(this.config.costIncreaseThreshold);
-      const purchases = Decimal.affordGeometricSeries(availableIP, this.cost, this.costIncrease, 0).toNumber();
+      // const purchases = Decimal.affordGeometricSeries(availableIP, this.cost, this.costIncrease, 0).toNumber();
+      const purchases = Math.floor(new Decimal(availableIP).divide(this.cost).log(this.costIncrease) + 1);
+      // no need for geometric series calculation since free -- ADfree
       if (purchases <= 0) return;
       this.purchase(purchases);
     }
@@ -200,7 +203,9 @@ class InfinityIPMultUpgrade extends GameMechanicState {
     // it will go in this part)
     if (this.hasIncreasedCost) {
       const availableIP = Currency.infinityPoints.value.clampMax(this.config.costCap);
-      const purchases = Decimal.affordGeometricSeries(availableIP, this.cost, this.costIncrease, 0).toNumber();
+      // const purchases = Decimal.affordGeometricSeries(availableIP, this.cost, this.costIncrease, 0).toNumber();
+      const purchases = Math.floor(new Decimal(availableIP).divide(this.cost).log(this.costIncrease) + 1);
+      // no need for geometric series calculation since free -- ADfree
       if (purchases <= 0) return;
       this.purchase(purchases);
     }

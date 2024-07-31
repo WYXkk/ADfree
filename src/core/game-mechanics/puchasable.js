@@ -41,7 +41,8 @@ export class PurchasableMechanicState extends GameMechanicState {
 
   purchase() {
     if (!this.canBeBought) return false;
-    this.currency.subtract(this.cost);
+    // this.currency.subtract(this.cost);
+    // Cost removed -- ADfree
     this.isBought = true;
     this.onPurchased();
     GameUI.update();

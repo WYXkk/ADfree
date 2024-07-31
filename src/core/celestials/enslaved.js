@@ -143,7 +143,8 @@ export const Enslaved = {
   buyUnlock(info) {
     if (!this.canBuy(info)) return false;
     if (info.id === ENSLAVED_UNLOCKS.RUN.id) this.quotes.unlockRun.show();
-    player.celestials.enslaved.stored -= info.price;
+    // player.celestials.enslaved.stored -= info.price;
+    // Cost removed -- ADfree
     player.celestials.enslaved.unlocks.push(info.id);
     return true;
   },
@@ -218,7 +219,8 @@ export const Enslaved = {
   },
   spendTimeForHint() {
     if (player.celestials.enslaved.stored < this.nextHintCost) return false;
-    player.celestials.enslaved.stored -= this.nextHintCost;
+    // player.celestials.enslaved.stored -= this.nextHintCost;
+    // Cost removed -- ADfree
     if (Enslaved.hintCostIncreases === 0) {
       player.celestials.enslaved.zeroHintTime = Date.now() + TimeSpan.fromDays(1).totalMilliseconds;
     } else {
@@ -283,6 +285,7 @@ export const Tesseracts = {
     if (!this.canBuyTesseract) return;
     if (GameEnd.creditsEverClosed) return;
     player.celestials.enslaved.tesseracts++;
+    // WTF Tesseracts are free in vanilla? -- ADfree
   },
 
   // This used to be a somewhat complicated function which spaced costs out super-exponentially, but the decision to

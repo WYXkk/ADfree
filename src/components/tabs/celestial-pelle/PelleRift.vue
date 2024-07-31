@@ -23,7 +23,8 @@ export default {
       isMaxed: false,
       totalFill: new Decimal(),
       resource: new Decimal(),
-      hasEffectiveFill: false,
+      // hasEffectiveFill: false,
+      // no use? -- ADfree
       effects: []
     };
   },
@@ -36,10 +37,11 @@ export default {
     specialRift() {
       return this.rift.id === 3;
     },
-    infoTooltip() {
-      return `The Replicanti requirement for the 2nd Rift is based on the total amount you have ever filled, including
-        any amount drained to fill this Rift.`;
-    }
+    // infoTooltip() {
+    //   return `The Replicanti requirement for the 2nd Rift is based on the total amount you have ever filled, including
+    //     any amount drained to fill this Rift.`;
+    // }
+    // Reword to overfill -- ADfree
   },
   methods: {
     update() {
@@ -51,7 +53,8 @@ export default {
       this.isMaxed = rift.isMaxed || Pelle.hasGalaxyGenerator;
       this.setValue("totalFill", rift.totalFill);
       this.setValue("resource", rift.fillCurrency.value);
-      this.hasEffectiveFill = rift.key === "decay" && PelleRifts.chaos.milestones[0].canBeApplied;
+      // this.hasEffectiveFill = rift.key === "decay" && PelleRifts.chaos.milestones[0].canBeApplied;
+      // no use? -- ADfree
     },
     // One rift has a number and the others are all Decimals; this reduces boilerplate for setting multiple values
     setValue(key, value) {
@@ -104,13 +107,7 @@ export default {
               {{ riftName() }}
             </h2>
             <div class="c-pelle-rift-rift-info-container">
-              Drains {{ drainResource() }} to fill.
-              <span
-                v-if="specialRift"
-                :ach-tooltip="infoTooltip"
-              >
-                <i class="fas fa-question-circle" />
-              </span>
+              Requires {{ drainResource() }} to fill.
               <br>
               <template v-if="!isMaxed">
                 Current Amount: {{ formatRift(resource) }}

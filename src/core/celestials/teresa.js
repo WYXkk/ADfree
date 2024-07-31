@@ -14,11 +14,16 @@ export const Teresa = {
   },
   pourRM(diff) {
     if (this.pouredAmount >= Teresa.pouredAmountCap) return;
-    this.timePoured += diff;
+    // this.timePoured += diff;
+    // const rm = Currency.realityMachines.value;
+    // const rmPoured = Math.min((this.pouredAmount + 1e6) * 0.01 * Math.pow(this.timePoured, 2), rm.toNumber());
+    // this.pouredAmount += Math.min(rmPoured, Teresa.pouredAmountCap - this.pouredAmount);
+    // Currency.realityMachines.subtract(rmPoured);
     const rm = Currency.realityMachines.value;
-    const rmPoured = Math.min((this.pouredAmount + 1e6) * 0.01 * Math.pow(this.timePoured, 2), rm.toNumber());
-    this.pouredAmount += Math.min(rmPoured, Teresa.pouredAmountCap - this.pouredAmount);
-    Currency.realityMachines.subtract(rmPoured);
+    if (this.pouredAmount >= rm.toNumber()) return;
+    this.pouredAmount = Math.min(Teresa.pouredAmountCap, rm.toNumber());
+    // Currency.realityMachines.subtract(rmPoured);
+    // Cost removed, make pour instant, and hardcap poured amount at current value -- ADfree
     this.checkForUnlocks();
   },
   checkForUnlocks() {
@@ -43,7 +48,9 @@ export const Teresa = {
     return Math.min(Math.log10(this.pouredAmount) / 24, 1);
   },
   get possibleFill() {
-    return Math.min(Currency.realityMachines.value.plus(this.pouredAmount).log10() / 24, 1);
+    // return Math.min(Currency.realityMachines.value.plus(this.pouredAmount).log10() / 24, 1);
+    return Math.min(Decimal.max(Currency.realityMachines.value, this.pouredAmount).log10() / 24, 1);
+    // Possible fill is current -- ADfree
   },
   get rmMultiplier() {
     return Math.max(250 * Math.pow(this.pouredAmount / 1e24, 0.1), 1);

@@ -34,10 +34,12 @@ export class TimeTheoremPurchaseType {
   get costIncrement() { throw new NotImplementedError(); }
 
   get bulkPossible() {
-    if (Perk.ttFree.canBeApplied) {
-      return Math.floor(this.currency.value.divide(this.cost).log10() / this.costIncrement.log10() + 1);
-    }
-    return Decimal.affordGeometricSeries(this.currency.value, this.cost, this.costIncrement, 0).toNumber();
+    // if (Perk.ttFree.canBeApplied) {
+    //   return Math.floor(this.currency.value.divide(this.cost).log10() / this.costIncrement.log10() + 1);
+    // }
+    // return Decimal.affordGeometricSeries(this.currency.value, this.cost, this.costIncrement, 0).toNumber();
+    return Math.floor(this.currency.value.divide(this.cost).log10() / this.costIncrement.log10() + 1);
+    // works as TTF always active since free -- ADfree
   }
 
   // Note: This is actually just the cost of the largest term of the geometric series. If buying EP without the
@@ -50,7 +52,8 @@ export class TimeTheoremPurchaseType {
     if (!this.canAfford) return false;
     let purchased = false;
     const amount = this.bulkPossible;
-    const buyFn = cost => (Perk.ttFree.canBeApplied ? this.currency.gte(cost) : this.currency.purchase(cost));
+    const buyFn = cost => this.currency.gte(cost);
+    // works as TTF always active since free -- ADfree
     // This will sometimes buy one too few for EP, so we just have to buy 1 after.
     if (bulk && buyFn(this.bulkCost(amount))) {
       Currency.timeTheorems.add(amount);
@@ -103,8 +106,10 @@ TimeTheoremPurchaseType.ep = new class extends TimeTheoremPurchaseType {
   get costIncrement() { return DC.D2; }
 
   bulkCost(amount) {
-    if (Perk.ttFree.canBeApplied) return this.cost.times(this.costIncrement.pow(amount - 1));
-    return this.costIncrement.pow(amount + this.amount).subtract(this.cost);
+    return this.cost.times(this.costIncrement.pow(amount - 1));
+    // if (Perk.ttFree.canBeApplied) return this.cost.times(this.costIncrement.pow(amount - 1));
+    // return this.costIncrement.pow(amount + this.amount).subtract(this.cost);
+    // work as TTF always active -- ADfree
   }
 }();
 
@@ -146,14 +151,16 @@ export const TimeTheorems = {
   },
 
   calculateTimeStudiesCost() {
-    let totalCost = TimeStudy.boughtNormalTS()
-      .map(ts => ts.cost)
-      .reduce(Number.sumReducer, 0);
-    const ecStudy = TimeStudy.eternityChallenge.current();
-    if (ecStudy !== undefined) {
-      totalCost += ecStudy.cost;
-    }
-    if (Enslaved.isRunning && player.celestials.enslaved.hasSecretStudy) totalCost -= 100;
-    return totalCost;
+    // let totalCost = TimeStudy.boughtNormalTS()
+    //   .map(ts => ts.cost)
+    //   .reduce(Number.sumReducer, 0);
+    // const ecStudy = TimeStudy.eternityChallenge.current();
+    // if (ecStudy !== undefined) {
+    //   totalCost += ecStudy.cost;
+    // }
+    // if (Enslaved.isRunning && player.celestials.enslaved.hasSecretStudy) totalCost -= 100;
+    // return totalCost;
+    return 0;
+    // there is no cost since free -- ADfree
   }
 };

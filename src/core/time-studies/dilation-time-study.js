@@ -58,7 +58,8 @@ export class DilationTimeStudyState extends TimeStudyState {
     }
 
     player.dilation.studies.push(this.id);
-    Currency.timeTheorems.subtract(this.cost);
+    // Currency.timeTheorems.subtract(this.cost);
+    // Cost removed -- ADfree
     return true;
   }
 }

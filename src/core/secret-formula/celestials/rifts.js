@@ -59,8 +59,8 @@ export const pelleRifts = {
     percentage: totalFill => totalFill.plus(1).log10() * 0.05 / 100,
     // 0 - 1
     percentageToFill: percentage => Decimal.pow(10, 20 * percentage * 100).minus(1),
-    effect: totalFill => (PelleRifts.chaos.milestones[0].canBeApplied
-      ? Decimal.sqrt(2000 + 1) : Decimal.sqrt(totalFill.plus(1).log10() + 1)),
+    effect: totalFill => Decimal.sqrt(Math.clampMax(totalFill.plus(1).log10(), 2000) + 1),
+    // Reword to overfill -- ADfree
     currency: () => Currency.replicanti,
     galaxyGeneratorThreshold: 1e7,
     milestones: [
@@ -125,8 +125,8 @@ export const pelleRifts = {
       {
         resource: "chaos",
         requirement: 0.09,
-        description: () => `${wordShift.wordCycle(PelleRifts.decay.name)} \
-        effect is always maxed and milestones always active`
+        description: () => `You can overfill ${wordShift.wordCycle(PelleRifts.decay.name)} to 1000%`
+        // Reword to overfill -- ADfree
       },
       {
         resource: "chaos",

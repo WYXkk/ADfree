@@ -65,7 +65,7 @@ export default {
     buttonValue() {
       if (this.isCapped) return "";
       if (this.isContinuumActive) return this.continuumString;
-      const prefix = this.showCostTitle(this.buyUntil10 ? this.until10Cost : this.singleCost) ? "Cost: " : "";
+      const prefix = this.showCostTitle(this.buyUntil10 ? this.until10Cost : this.singleCost) ? "Req: " : "";
       const suffix = this.isCostsAD ? this.costUnit : "AM";
       return `${prefix}${this.costDisplay} ${suffix}`;
     },
@@ -87,7 +87,7 @@ export default {
       this.boughtBefore10 = dimension.boughtBefore10;
       this.howManyCanBuy = buyUntil10 ? dimension.howManyCanBuy : Math.min(dimension.howManyCanBuy, 1);
       this.singleCost.copyFrom(dimension.cost);
-      this.until10Cost.copyFrom(dimension.cost.times(Math.max(dimension.howManyCanBuy, 1)));
+      this.until10Cost.copyFrom(dimension.cost);
       if (tier < 8) {
         this.rateOfChange.copyFrom(dimension.rateOfChange);
       }

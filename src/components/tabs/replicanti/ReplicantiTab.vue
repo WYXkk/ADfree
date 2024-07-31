@@ -49,7 +49,7 @@ export default {
       return new ReplicantiUpgradeButtonSetup(
         ReplicantiUpgrade.chance,
         value => `Replicate chance: ${formatPercents(value)}`,
-        cost => `+${formatPercents(0.01)} Costs: ${format(cost)} IP`
+        cost => `+${formatPercents(0.01)} Req: ${format(cost)} IP`
       );
     },
     replicantiIntervalSetup() {
@@ -74,7 +74,7 @@ export default {
         upgrade,
         value => `Interval: ${formatInterval(value)}`,
         cost =>
-          `➜ ${formatInterval(upgrade.nextValue)} Costs: ${format(cost)} IP`
+          `➜ ${formatInterval(upgrade.nextValue)} Req: ${format(cost)} IP`
       );
     },
     maxGalaxySetup() {
@@ -92,7 +92,7 @@ export default {
           }
           return description;
         },
-        cost => `+${formatInt(1)} Costs: ${format(cost)} IP`
+        cost => `+${formatInt(1)} Req: ${format(cost)} IP`
       );
     },
     boostText() {
@@ -197,7 +197,7 @@ export default {
     >
       Unlock Replicanti
       <br>
-      Cost: {{ format(unlockCost) }} IP
+      Req: {{ format(unlockCost) }} IP
     </PrimaryButton>
     <template v-else>
       <div

@@ -267,8 +267,9 @@ export class TimeStudyTree {
 
     // Don't add the costs nor add the study if it is one using ST and there are none
     if (maxST === 0 && stNeeded > 0) return;
-    this.spentTheorems[0] += config.cost;
-    this.spentTheorems[1] += stNeeded;
+    // this.spentTheorems[0] += config.cost;
+    // this.spentTheorems[1] += stNeeded;
+    // Cost removed -- ADfree
 
     this.purchasedStudies.push(study);
   }

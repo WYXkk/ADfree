@@ -137,7 +137,7 @@ export default {
       V.checkForUnlocks();
     },
     reductionTooltip(hex) {
-      return `Spend ${quantify("Perk Point", hex.reductionCost, 2, 0)}
+      return `Reach ${quantify("Perk Point", hex.reductionCost, 2, 0)}
         to reduce goal by ${format(hex.config.perReductionStep)}`;
     },
     hexColor(hex) {

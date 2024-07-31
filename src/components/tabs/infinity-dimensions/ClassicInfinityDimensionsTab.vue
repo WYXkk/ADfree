@@ -132,7 +132,7 @@ export default {
           Buy a Tesseract ({{ tesseractCountString }})
         </p>
         <p>Increase Infinity Dimension caps by {{ format(nextDimCapIncrease, 2) }}</p>
-        <p><b>Costs: {{ format(tesseractCost) }} IP</b></p>
+        <p><b>Req: {{ format(tesseractCost) }} IP</b></p>
       </button>
     </div>
     <div v-if="isEnslavedRunning">

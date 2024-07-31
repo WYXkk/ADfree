@@ -20,7 +20,7 @@ export default {
     },
     label: {
       type: String,
-      default: "Cost:",
+      default: "Req:",
       required: false
     }
   },

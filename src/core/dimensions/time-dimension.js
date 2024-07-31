@@ -21,7 +21,8 @@ export function buySingleTimeDimension(tier, auto = false) {
     return false;
   }
 
-  Currency.eternityPoints.subtract(dim.cost);
+  // Currency.eternityPoints.subtract(dim.cost);
+  // Cost removed -- ADfree
   dim.amount = dim.amount.plus(1);
   dim.bought += 1;
   dim.cost = dim.nextCost(dim.bought);
@@ -73,7 +74,8 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
     firstCost: dim.cost,
   }, dim.bought);
   if (!bulk) return false;
-  Currency.eternityPoints.subtract(bulk.purchasePrice);
+  // Currency.eternityPoints.subtract(bulk.purchasePrice);
+  // Cost removed -- ADfree
   dim.amount = dim.amount.plus(bulk.quantity);
   dim.bought += bulk.quantity;
   dim.cost = dim.nextCost(dim.bought);
@@ -87,11 +89,13 @@ export function maxAllTimeDimensions() {
   }
 
   // Buy everything costing less than 1% of initial EP
+  // change to 100% since free -- ADfree
   for (let i = 8; i > 0; i--) {
-    buyMaxTimeDimension(i, 0.01, true);
+    buyMaxTimeDimension(i, 1, true);
   }
 
   // Loop buying the cheapest dimension possible; explicit infinite loops make me nervous
+  // probably no longer needed but just leave it here -- ADfree
   const tierCheck = tier => (RealityUpgrade(13).isLockingMechanics ? tier < 5 : true);
   const purchasableDimensions = TimeDimensions.all.filter(d => d.isUnlocked && tierCheck(d.tier));
   for (let stop = 0; stop < 1000; stop++) {

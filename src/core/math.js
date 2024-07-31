@@ -46,7 +46,8 @@ Math.PI_2 = Math.PI * 2;
 window.bulkBuyBinarySearch = function bulkBuyBinarySearch(money, costInfo, alreadyBought) {
   const costFunction = costInfo.costFunction;
   const firstCost = costInfo.firstCost === undefined ? costFunction(alreadyBought) : costInfo.firstCost;
-  const isCumulative = costInfo.cumulative === undefined ? true : costInfo.cumulative;
+  // const isCumulative = costInfo.cumulative === undefined ? true : costInfo.cumulative;
+  // Always behave as non-cumulative, since free -- ADfree
   if (money.lt(firstCost)) return null;
   // Attempt to find the max we can purchase. We know we can buy 1, so we try 2, 4, 8, etc
   // to figure out the upper limit
@@ -73,9 +74,12 @@ window.bulkBuyBinarySearch = function bulkBuyBinarySearch(money, costInfo, alrea
     }
   }
   const baseCost = costFunction(alreadyBought + canBuy - 1);
-  if (!isCumulative) {
-    return { quantity: canBuy, purchasePrice: baseCost };
-  }
+  // if (!isCumulative) {
+  //   return { quantity: canBuy, purchasePrice: baseCost };
+  // }
+  return { quantity: canBuy, purchasePrice: baseCost };
+  // Always behave as non-cumulative, since free -- ADfree
+  // Code below no longer executed, but just leave it here -- ADfree
   let otherCost = DC.D0;
   // Account for costs leading up to that purchase; we are basically adding things
   // up until they are insignificant

@@ -158,7 +158,8 @@ export class Currency {
 
   purchase(cost) {
     if (!this.gte(cost)) return false;
-    this.subtract(cost);
+    // this.subtract(cost);
+    // Cost removed -- ADfree
     return true;
   }
 

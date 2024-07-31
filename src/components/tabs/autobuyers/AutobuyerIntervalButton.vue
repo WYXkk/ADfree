@@ -46,7 +46,7 @@ export default {
   >
     {{ formatPercents(0.4) }} smaller interval
     <br>
-    Cost: {{ format(cost, 2) }} IP
+    Req: {{ format(cost, 2) }} IP
   </button>
   <button
     v-else-if="!isMaxed"

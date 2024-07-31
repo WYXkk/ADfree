@@ -44,6 +44,7 @@ export default {
     },
   }
 };
+// Since everything needs to be free, this text has to be reworded -- ADfree
 </script>
 
 <template>
@@ -57,7 +58,7 @@ export default {
       ... you ... have great potential ...
       <br>
       <br>
-      Cost: {{ format(-enslavedTT) }} Time Theorems
+      Gives {{ format(enslavedTT) }} free Time Theorems
     </span>
   </button>
 </template>

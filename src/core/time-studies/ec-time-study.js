@@ -36,7 +36,8 @@ export class ECTimeStudyState extends TimeStudyState {
         Tab.challenges.eternity.show();
       }
       player.challenge.eternity.requirementBits |= 1 << this.id;
-      Currency.timeTheorems.subtract(this.cost);
+      // Currency.timeTheorems.subtract(this.cost);
+      // Cost removed -- ADfree
       TimeStudyTree.commitToGameState([TimeStudy.eternityChallenge(this.id)]);
       return true;
     }

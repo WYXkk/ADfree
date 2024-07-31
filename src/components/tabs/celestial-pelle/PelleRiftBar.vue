@@ -20,7 +20,9 @@ export default {
       isMaxed: false,
       percentage: 0,
       reducedTo: 0,
-      hasEffectiveFill: false,
+      // hasEffectiveFill: false,
+      maxPercentage: 1,
+      // Reword to overfill -- ADfree
       selectedHoverMilestone: this.rift.milestones[0],
       // Converts 1 rem to number of px
       remToPx: parseInt(getComputedStyle(document.documentElement).fontSize, 10),
@@ -44,8 +46,9 @@ export default {
       this.isMaxed = rift.isMaxed || Pelle.hasGalaxyGenerator;
       this.percentage = rift.percentage;
       this.reducedTo = rift.reducedTo;
-      this.hasEffectiveFill = rift.config.key === "decay" && PelleRifts.chaos.milestones[0].canBeApplied;
-
+      // this.hasEffectiveFill = rift.config.key === "decay" && PelleRifts.chaos.milestones[0].canBeApplied;
+      this.maxPercentage = rift.maxPercentage;
+      // Reword to overfill -- ADfree
       this.selectedMilestoneResourceText = this.milestoneResourceText(this.selectedHoverMilestone);
       this.selectedMilestoneDescriptionText = this.milestoneDescriptionText(this.selectedHoverMilestone);
     },
@@ -70,9 +73,9 @@ export default {
       if (!this.isMaxed) this.rift.toggle();
     },
     barOverlay() {
-      const overfill = this.percentage > 1;
+      const overfill = this.percentage > this.maxPercentage;
       return {
-        "o-pelle-rift-bar-permanent": !overfill && this.hasEffectiveFill,
+        "o-pelle-rift-bar-permanent": !overfill,
         "o-pelle-rift-bar-overfilled": overfill,
       };
     },
@@ -113,7 +116,7 @@ export default {
     ref="pelleRiftBar"
     class="c-pelle-rift-bar"
     :class="{
-      'c-pelle-rift-bar-overfill-container': percentage > 1,
+      'c-pelle-rift-bar-overfill-container': percentage > maxPercentage,
       'c-pelle-rift-bar--idle': !isActive && !isMaxed,
       'c-pelle-rift-bar--filling': isActive
     }"
@@ -133,7 +136,7 @@ export default {
         v-if="reducedTo < 1"
         class="o-pelle-rift-bar-reducedto"
         :style="{
-          width: `${Math.clampMax(100 - reducedTo * 100, 100)}%`,
+          width: `${Math.clampMin(Math.clampMax(100 - reducedTo * maxPercentage * 100, 100), 0)}%`,
         }"
       />
       <!-- This bar overlay adds the shadow within the bar so the ugly edges don't show -->
@@ -150,7 +153,7 @@ export default {
         class="o-pelle-rift-bar-milestone-line"
         :class="{
           'o-pelle-rift-bar-milestone-line--unlocked': hasMilestone(milestone),
-          'o-pelle-rift-bar-milestone-line--disabled': reducedTo < milestone.requirement
+          'o-pelle-rift-bar-milestone-line--disabled': reducedTo * maxPercentage < milestone.requirement
         }"
         :style="{
           left: `calc(${milestone.requirement * 100}% - 0.25rem)`

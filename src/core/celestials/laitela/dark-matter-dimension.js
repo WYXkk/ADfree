@@ -100,8 +100,11 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get intervalAfterAscension() {
-    const purchases = Decimal.affordGeometricSeries(Currency.darkMatter.value, this.rawIntervalCost,
-      this.intervalCostIncrease, 0).toNumber();
+    // const purchases = Decimal.affordGeometricSeries(Currency.darkMatter.value, this.rawIntervalCost,
+    //   this.intervalCostIncrease, 0).toNumber();
+    const purchases = Math.floor(new Decimal(Currency.darkMatter.value).divide(this.rawIntervalCost)
+      .log(this.intervalCostIncrease) + 1);
+    // no need for geometric series calculation since free -- ADfree
     return Math.clampMin(this.intervalPurchaseCap, SingularityMilestone.ascensionIntervalScaling.effectOrDefault(1200) *
       this.rawInterval * Math.pow(INTERVAL_PER_UPGRADE, purchases));
   }

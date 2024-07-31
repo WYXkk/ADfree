@@ -24,7 +24,7 @@ export const infinityUpgrades = {
   },
   dim18mult: {
     id: "18Mult",
-    cost: 1,
+    cost: 2,
     checkRequirement: () => InfinityUpgrade.totalTimeMult.isBought,
     description: "1st and 8th Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => dimInfinityMult(),
@@ -37,7 +37,7 @@ export const infinityUpgrades = {
   },
   dim27mult: {
     id: "27Mult",
-    cost: 1,
+    cost: 2,
     checkRequirement: () => InfinityUpgrade.buy10Mult.isBought,
     description: "2nd and 7th Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => dimInfinityMult(),
@@ -50,7 +50,7 @@ export const infinityUpgrades = {
   },
   dim36mult: {
     id: "36Mult",
-    cost: 1,
+    cost: 3,
     checkRequirement: () => InfinityUpgrade.dim18mult.isBought,
     description: "3rd and 6th Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => dimInfinityMult(),
@@ -63,7 +63,7 @@ export const infinityUpgrades = {
   },
   dim45mult: {
     id: "45Mult",
-    cost: 1,
+    cost: 3,
     checkRequirement: () => InfinityUpgrade.dim27mult.isBought,
     description: "4th and 5th Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => dimInfinityMult(),
@@ -76,7 +76,7 @@ export const infinityUpgrades = {
   },
   resetBoost: {
     id: "resetBoost",
-    cost: 1,
+    cost: 4,
     checkRequirement: () => InfinityUpgrade.dim36mult.isBought,
     description: () =>
       `Decrease the number of Dimensions needed for Dimension Boosts and Antimatter Galaxies by ${formatInt(9)}`,
@@ -102,7 +102,7 @@ export const infinityUpgrades = {
   },
   galaxyBoost: {
     id: "galaxyBoost",
-    cost: 2,
+    cost: 5,
     checkRequirement: () => InfinityUpgrade.dim45mult.isBought,
     description: "All Galaxies are twice as strong",
     effect: 2,
@@ -129,7 +129,7 @@ export const infinityUpgrades = {
   },
   unspentIPMult: {
     id: "unspentBonus",
-    cost: 5,
+    cost: 8,
     checkRequirement: () => InfinityUpgrade.thisInfinityTimeMult.isBought,
     description: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points",
     effect: () => Currency.infinityPoints.value.dividedBy(2).pow(1.5).plus(1),
@@ -142,7 +142,7 @@ export const infinityUpgrades = {
   },
   dimboostMult: {
     id: "resetMult",
-    cost: 7,
+    cost: 15,
     checkRequirement: () => InfinityUpgrade.unspentIPMult.isBought,
     description: "Increase Dimension Boost multiplier",
     effect: () => 2.5,
@@ -155,7 +155,7 @@ export const infinityUpgrades = {
   },
   ipGen: {
     id: "passiveGen",
-    cost: 10,
+    cost: 25,
     checkRequirement: () => InfinityUpgrade.dimboostMult.isBought,
     description: () => `Passively generate Infinity Points ${formatInt(10)} times slower than your fastest Infinity`,
     // Cutting corners: this is not actual effect, but it is totalIPMult that is displyed on upgrade
@@ -183,21 +183,21 @@ export const infinityUpgrades = {
   },
   skipReset2: {
     id: "skipReset2",
-    cost: 40,
+    cost: 60,
     checkRequirement: () => InfinityUpgrade.skipReset1.isBought,
     description: () =>
       `Start every reset with ${formatInt(2)} Dimension Boosts, automatically unlocking the 6th Antimatter Dimension`,
   },
   skipReset3: {
     id: "skipReset3",
-    cost: 80,
+    cost: 140,
     checkRequirement: () => InfinityUpgrade.skipReset2.isBought,
     description: () =>
       `Start every reset with ${formatInt(3)} Dimension Boosts, automatically unlocking the 7th Antimatter Dimension`,
   },
   skipResetGalaxy: {
     id: "skipResetGalaxy",
-    cost: 300,
+    cost: 440,
     checkRequirement: () => InfinityUpgrade.skipReset3.isBought,
     description: () =>
       `Start every reset with ${formatInt(4)} Dimension Boosts, automatically unlocking the 8th Antimatter Dimension;

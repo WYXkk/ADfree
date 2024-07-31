@@ -40,9 +40,11 @@ export function replicantiGalaxy(auto) {
   const galaxyGain = Replicanti.galaxies.gain;
   if (galaxyGain < 1) return;
   player.replicanti.timer = 0;
-  Replicanti.amount = Achievement(126).isUnlocked && !Pelle.isDoomed
-    ? Decimal.pow10(Replicanti.amount.log10() - LOG10_MAX_VALUE * galaxyGain)
-    : DC.D1;
+  // Replicanti.amount = Replicanti.galaxies.isFree
+  //   ? Decimal.pow10(Replicanti.amount.log10() - LOG10_MAX_VALUE * galaxyGain)
+  //   : DC.D1;
+  if (!Replicanti.galaxies.isFree) Replicanti.amount = DC.D1;
+  // RG no longer cost with r126 -- ADfree
   addReplicantiGalaxies(galaxyGain);
 }
 
@@ -72,6 +74,16 @@ function fastReplicantiBelow308(log10GainFactor, isAutobuyerActive) {
   }
 
   if (!shouldBuyRG) {
+    const remainingGain = log10GainFactor.minus(replicantiCap().log10() - Replicanti.amount.log10()).clampMin(0);
+    Replicanti.amount = Decimal.min(uncappedAmount, replicantiCap());
+    return remainingGain;
+  }
+
+  // deal with when RG no longer costs -- ADfree
+  if (Replicanti.galaxies.isFree) {
+    if(uncappedAmount.gt(Number.MAX_VALUE)) {
+      addReplicantiGalaxies(Replicanti.galaxies.max - player.replicanti.galaxies);
+    }
     const remainingGain = log10GainFactor.minus(replicantiCap().log10() - Replicanti.amount.log10()).clampMin(0);
     Replicanti.amount = Decimal.min(uncappedAmount, replicantiCap());
     return remainingGain;
@@ -308,7 +320,8 @@ class ReplicantiUpgradeState {
 
   purchase() {
     if (!this.canBeBought) return;
-    Currency.infinityPoints.subtract(this.cost);
+    // Currency.infinityPoints.subtract(this.cost);
+    // Cost removed -- ADfree
     this.baseCost = Decimal.times(this.baseCost, this.costIncrease);
     this.value = this.nextValue;
     if (EternityChallenge(8).isRunning) player.eterc8repl--;
@@ -359,12 +372,15 @@ export const ReplicantiUpgrade = {
       // Fixed price increase of 1e15; so total cost for N upgrades is:
       // cost + cost * 1e15 + cost * 1e30 + ... + cost * 1e15^(N-1) == cost * (1e15^N - 1) / (1e15 - 1)
       // N = log(IP * (1e15 - 1) / cost + 1) / log(1e15)
-      let N = Currency.infinityPoints.value.times(this.costIncrease - 1)
-        .dividedBy(this.cost).plus(1).log(this.costIncrease);
+      // the inverse is simpler since free -- ADfree
+      // let N = Currency.infinityPoints.value.times(this.costIncrease - 1)
+      //   .dividedBy(this.cost).plus(1).log(this.costIncrease);
+      let N = Currency.infinityPoints.value.dividedBy(this.cost).log(this.costIncrease) + 1;
       N = Math.round((Math.min(this.value + 0.01 * Math.floor(N), this.cap) - this.value) * 100);
       if (N <= 0) return;
-      const totalCost = this.cost.times(Decimal.pow(this.costIncrease, N).minus(1).dividedBy(this.costIncrease - 1));
-      Currency.infinityPoints.subtract(totalCost);
+      // const totalCost = this.cost.times(Decimal.pow(this.costIncrease, N).minus(1).dividedBy(this.costIncrease - 1));
+      // Currency.infinityPoints.subtract(totalCost);
+      // Cost removed -- ADfree
       this.baseCost = this.baseCost.times(Decimal.pow(this.costIncrease, N));
       this.value = this.nearestPercent(this.value + 0.01 * N);
     }
@@ -464,7 +480,8 @@ export const ReplicantiUpgrade = {
         cumulative: true,
       }, this.value);
       if (!bulk) return;
-      Currency.infinityPoints.subtract(bulk.purchasePrice);
+      // Currency.infinityPoints.subtract(bulk.purchasePrice);
+      // Cost removed -- ADfree
       this.value += bulk.quantity;
       this.baseCost = this.baseCostAfterCount(this.value);
     }
@@ -518,7 +535,8 @@ export const Replicanti = {
     const cost = DC.E140.dividedByEffectOf(PelleRifts.vacuum.milestones[1]);
     if (player.replicanti.unl) return;
     if (freeUnlock || Currency.infinityPoints.gte(cost)) {
-      if (!freeUnlock) Currency.infinityPoints.subtract(cost);
+      // if (!freeUnlock) Currency.infinityPoints.subtract(cost);
+      // Cost removed -- ADfree
       player.replicanti.unl = true;
       player.replicanti.timer = 0;
       Replicanti.amount = DC.D1;
@@ -562,12 +580,18 @@ export const Replicanti = {
     },
     get gain() {
       if (!this.canBuyMore) return 0;
-      if (Achievement(126).isUnlocked) {
+      if (Replicanti.galaxies.isFree) {
         const maxGain = Replicanti.galaxies.max - player.replicanti.galaxies;
-        const logReplicanti = Replicanti.amount.log10();
-        return Math.min(maxGain, Math.floor(logReplicanti / LOG10_MAX_VALUE));
+        // const logReplicanti = Replicanti.amount.log10();
+        // return Math.min(maxGain, Math.floor(logReplicanti / LOG10_MAX_VALUE));
+        return maxGain;
+        // instant max since they are free -- ADfree
       }
       return 1;
+    },
+    get isFree() {
+      return Achievement(126).isUnlocked && (!Pelle.isDoomed || PelleUpgrade.replicantiGalaxyEM40.canBeApplied);
+      // Added for convinence -- ADfree
     },
   },
   get isUncapped() {

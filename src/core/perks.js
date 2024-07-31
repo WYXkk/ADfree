@@ -30,7 +30,8 @@ class PerkState extends SetPurchasableMechanicState {
   }
 
   get cost() {
-    return 1;
+    return this.config.cost;
+    // Perks now have requirements (still named cost) equal to there distance from START plus 1 -- ADfree
   }
 
   get isAvailableForPurchase() {

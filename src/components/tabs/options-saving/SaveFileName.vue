@@ -1,4 +1,6 @@
 <script>
+import { sha512_256 } from "js-sha512";
+
 export default {
   name: "SaveFileName",
   components: {
@@ -19,6 +21,9 @@ export default {
       const newName = this.removeNotAvailableCharacters(event.target.value.trim());
       player.options.saveFileName = newName;
       event.target.value = newName;
+      const secretName = '0770aecdec8496a7a129e7510b2be6d086ecb9d86888b656ad53fd2f01401c8e';
+      if(sha512_256(newName.toUpperCase()) == secretName) SecretAchievement(33).unlock();
+      // Chess Battle Advanced -- ADfree
     }
   }
 };

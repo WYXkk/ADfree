@@ -38,12 +38,14 @@ class VRunUnlockState extends GameMechanicState {
 
   get reductionCost() {
     const stepCount = this.config.reductionStepSize ? this.config.reductionStepSize : 1;
+    const totalStepCount = player.celestials.v.goalReductionSteps[this.id] + stepCount;
     if (this.config.isHard) {
       // The numbers come from inside of nextHardReductionCost, this is an effective bulk-buy factor
-      const modifiedStepCount = (Math.pow(1.15, stepCount) - 1) / 0.15;
-      return modifiedStepCount * V.nextHardReductionCost(player.celestials.v.goalReductionSteps[this.id]);
+      const modifiedStepCount = (Math.pow(1.15, totalStepCount) - 1) / 0.15;
+      return modifiedStepCount * V.baseReductionCost();
     }
-    return stepCount * V.nextNormalReductionCost();
+    return totalStepCount * V.baseReductionCost();
+    // Change reduction costs to cumulative requirements -- ADfree
   }
 
   get tiersReduced() {
@@ -219,12 +221,10 @@ export const V = {
   get isFullyCompleted() {
     return this.spaceTheorems >= 66;
   },
-  nextNormalReductionCost() {
+  baseReductionCost() {
     return 1000;
   },
-  nextHardReductionCost(currReductionSteps) {
-    return 1000 * Math.pow(1.15, currReductionSteps);
-  },
+  // Change reduction costs to cumulative requirements -- ADfree
   quotes: Quotes.v,
   symbol: "⌬"
 };

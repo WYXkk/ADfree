@@ -48,7 +48,7 @@ export default {
     },
     singleText() {
       if (this.isCapped) return "Capped";
-      const prefix = this.showCostTitle(this.singleCost) ? "Cost: " : "";
+      const prefix = this.showCostTitle(this.singleCost) ? "Req: " : "";
       const suffix = this.isCostsAD ? `${this.costUnit}` : "AM";
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
@@ -56,7 +56,7 @@ export default {
       if (this.isCapped) return "Shattered by Nameless";
       if (this.isContinuumActive) return `Continuum: ${this.continuumString}`;
 
-      const prefix = `Until ${formatInt(10)},${this.showCostTitle(this.until10Cost) ? " Cost" : ""}`;
+      const prefix = `Until ${formatInt(10)},${this.showCostTitle(this.until10Cost) ? " Req" : ""}`;
       const suffix = this.isCostsAD ? `${this.costUnit}` : "AM";
       return `${prefix} ${format(this.until10Cost)} ${suffix}`;
     },

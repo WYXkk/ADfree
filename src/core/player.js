@@ -723,7 +723,8 @@ window.player = {
         decay: {
           fill: DC.D0,
           active: false,
-          percentageSpent: 0,
+          // percentageSpent: 0,
+          // Reword to overfill -- ADfree
           reducedTo: 1
         },
         chaos: {

@@ -61,7 +61,7 @@ export default {
     <span>{{ bulkDisplay }}</span>
     <template v-if="!hasMaxedBulk">
       <br>
-      <span>Cost: {{ format(cost, 2, 0) }} IP</span>
+      <span>Req: {{ format(cost, 2, 0) }} IP</span>
     </template>
   </button>
   <button

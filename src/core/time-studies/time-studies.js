@@ -172,7 +172,8 @@ export class TimeStudyState extends GameMechanicState {
   }
 
   refund() {
-    Currency.timeTheorems.add(this.cost);
+    // Currency.timeTheorems.add(this.cost);
+    // Refund gives nothing since they are free now
   }
 
   get isAffordable() {

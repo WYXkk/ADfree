@@ -902,10 +902,12 @@ export const normalAchievements = [
     get description() { return `Have ${formatInt(180)} times more Replicanti Galaxies than Antimatter Galaxies.`; },
     checkRequirement: () => Replicanti.galaxies.total >= 180 * player.galaxies && player.galaxies > 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    get reward() {
-      return `Replicanti Galaxies divide your Replicanti by ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)}
-      instead of resetting them to ${formatInt(1)}.`;
-    },
+    // get reward() {
+    //   return `Replicanti Galaxies divide your Replicanti by ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)}
+    //   instead of resetting them to ${formatInt(1)}.`;
+    // },
+    reward: "Replicanti Galaxies no longer reset your Replicanti."
+    // isn't free RG fantastic? -- ADfree
   },
   {
     id: 127,

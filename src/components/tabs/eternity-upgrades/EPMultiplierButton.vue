@@ -75,7 +75,7 @@ export default {
         Currently: {{ formatX(multiplier, 2, 0) }}
       </div>
       <br>
-      Cost: {{ quantify("Eternity Point", cost, 2, 0) }}
+      Req: {{ quantify("Eternity Point", cost, 2, 0) }}
     </button>
     <PrimaryButton
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"

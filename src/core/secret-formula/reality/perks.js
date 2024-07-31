@@ -29,6 +29,7 @@ function vectorToNum(v) {
  * Note: This encoding/decoding only works properly for coordinates with values between -1000 and 1000, and will
  * be slightly off for vectors whose coordinates aren't divisible by 5
  */
+// Perks now have requirements (still named cost) equal to there distance from START plus 1 -- ADfree
 export const perks = {
   firstPerk: {
     id: 0,
@@ -40,6 +41,7 @@ export const perks = {
     },
     effect: 4,
     layoutPosList: [76596, 80200, 80600, 80200, 80188, 67769],
+    cost: 1,
   },
   startAM: {
     id: 10,
@@ -51,6 +53,7 @@ export const perks = {
     bumpCurrency: () => Currency.antimatter.bumpTo(5e130),
     effect: 5e130,
     layoutPosList: [76559, 80600, 80199, 80600, 82191, 75745],
+    cost: 2,
   },
   startIP1: {
     id: 12,
@@ -62,6 +65,7 @@ export const perks = {
     bumpCurrency: () => Currency.infinityPoints.bumpTo(5e15),
     effect: 5e15,
     layoutPosList: [74523, 80599, 79798, 80599, 82594, 91322],
+    cost: 3,
   },
   startIP2: {
     id: 13,
@@ -73,6 +77,7 @@ export const perks = {
     bumpCurrency: () => Currency.infinityPoints.bumpTo(5e130),
     effect: 5e130,
     layoutPosList: [62111, 80598, 79797, 80998, 82597, 91690],
+    cost: 4,
   },
   startEP1: {
     id: 14,
@@ -86,6 +91,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => `Start with ${formatInt(10)} EP`,
     layoutPosList: [88915, 80999, 79398, 80598, 82197, 103734],
+    cost: 4,
   },
   startEP2: {
     id: 15,
@@ -97,6 +103,7 @@ export const perks = {
     bumpCurrency: () => Currency.eternityPoints.bumpTo(5000),
     effect: 5000,
     layoutPosList: [92484, 81398, 78998, 80597, 82200, 102193],
+    cost: 5,
   },
   startEP3: {
     id: 16,
@@ -110,6 +117,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => `Start with ${format(5e9)} EP`,
     layoutPosList: [96459, 81798, 78997, 80596, 82203, 106224],
+    cost: 6,
   },
   startTP: {
     id: 17,
@@ -122,6 +130,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => `Start with ${formatInt(10)} TP`,
     layoutPosList: [102120, 81399, 79399, 80197, 81800, 109376],
+    cost: 5,
   },
   antimatterNoReset: {
     id: 30,
@@ -130,6 +139,7 @@ export const perks = {
     description: `Dimension Boosts and Antimatter Galaxies no longer reset
       Antimatter, Antimatter Dimensions, Tickspeed, or Dimensional Sacrifice.`,
     layoutPosList: [85343, 81000, 79799, 80199, 82194, 92553],
+    cost: 3,
   },
   studyPassive: {
     id: 31,
@@ -141,6 +151,7 @@ export const perks = {
         ${Pelle.isDoomed ? "" : `In addition, Time Study 132 also makes Replicanti ${format(3)} times faster.`}`;
     },
     layoutPosList: [67054, 79400, 80999, 80202, 78594, 52589],
+    cost: 3,
   },
   autounlockEU1: {
     id: 40,
@@ -148,6 +159,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: `Automatically unlock the first row of Eternity Upgrades for free once you have Eternities.`,
     layoutPosList: [89407, 80601, 80201, 79800, 80591, 73007],
+    cost: 2,
   },
   autounlockEU2: {
     id: 41,
@@ -158,6 +170,7 @@ export const perks = {
         at ${formatX(1e10)} times less than their original price.`;
     },
     layoutPosList: [103008, 81001, 80202, 79400, 80594, 81867],
+    cost: 3,
   },
   autounlockDilation1: {
     id: 42,
@@ -165,6 +178,7 @@ export const perks = {
     family: PERK_FAMILY.DILATION,
     description: "After unlocking Dilation, automatically unlock the second row of Dilation Upgrades for free.",
     layoutPosList: [119833, 81801, 79403, 79398, 80200, 97510],
+    cost: 5,
   },
   autounlockDilation2: {
     id: 43,
@@ -172,6 +186,7 @@ export const perks = {
     family: PERK_FAMILY.DILATION,
     description: "After unlocking Dilation, automatically unlock the third row of Dilation Upgrades for free.",
     layoutPosList: [124260, 82201, 79003, 79397, 80203, 85513],
+    cost: 6,
   },
   autounlockDilation3: {
     id: 44,
@@ -181,6 +196,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Auto-purchase TT generation",
     layoutPosList: [124289, 82601, 79002, 79396, 80206, 72282],
+    cost: 7,
   },
   autounlockTD: {
     id: 45,
@@ -190,6 +206,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Auto-unlock TD 5-8",
     layoutPosList: [127117, 82600, 79001, 79796, 80209, 61869],
+    cost: 8,
   },
   autounlockReality: {
     id: 46,
@@ -202,6 +219,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => "Auto-unlock Reality",
     layoutPosList: [124343, 83000, 79000, 79795, 80212, 71046],
+    cost: 9,
   },
   bypassIDAntimatter: {
     id: 51,
@@ -209,6 +227,7 @@ export const perks = {
     family: PERK_FAMILY.INFINITY,
     description: "Infinity Dimensions no longer have antimatter requirements.",
     layoutPosList: [51317, 80998, 79397, 80997, 82600, 104489],
+    cost: 5,
   },
   bypassTGReset: {
     id: 52,
@@ -216,6 +235,7 @@ export const perks = {
     family: PERK_FAMILY.DILATION,
     description: "The 2nd rebuyable Dilation Upgrade no longer resets your Dilated Time.",
     layoutPosList: [116568, 81800, 79801, 79798, 81400, 112677],
+    cost: 5,
   },
   bypassECDilation: {
     id: 53,
@@ -226,6 +246,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => `Unlocking Dilation only requires TT`,
     layoutPosList: [129011, 81802, 80203, 80198, 80600, 109116],
+    cost: 5,
   },
   bypassEC1Lock: {
     id: 54,
@@ -233,6 +254,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: "Remove the Eternity Challenge 1 requirement from Time Study 181.",
     layoutPosList: [64284, 79000, 81399, 80603, 78597, 44167],
+    cost: 4,
   },
   bypassEC2Lock: {
     id: 55,
@@ -240,6 +262,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: "Remove the Eternity Challenge 2 requirement from Time Study 181.",
     layoutPosList: [55463, 78999, 80998, 80602, 78197, 48944],
+    cost: 4,
   },
   bypassEC3Lock: {
     id: 56,
@@ -247,6 +270,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: "Remove the Eternity Challenge 3 requirement from Time Study 181.",
     layoutPosList: [75475, 79001, 81400, 80203, 78997, 47822],
+    cost: 4,
   },
   bypassEC5Lock: {
     id: 57,
@@ -254,6 +278,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: "Remove the Eternity Challenge 5 requirement from Time Study 62.",
     layoutPosList: [70626, 79800, 81000, 80201, 78591, 62607],
+    cost: 2,
   },
   autocompleteEC1: {
     id: 60,
@@ -268,6 +293,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => `Auto-complete ECs every ${formatInt(60)} minutes`,
     layoutPosList: [90660, 79402, 81002, 79803, 79397, 46664],
+    cost: 4,
   },
   autocompleteEC2: {
     id: 61,
@@ -279,6 +305,7 @@ export const perks = {
     },
     effect: 40,
     layoutPosList: [95485, 79002, 81402, 79804, 79400, 53486],
+    cost: 5,
   },
   autocompleteEC3: {
     id: 62,
@@ -292,6 +319,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => `Auto-complete ECs every ${formatInt(20)} minutes`,
     layoutPosList: [96311, 78602, 81401, 80204, 79403, 61903],
+    cost: 6,
   },
   studyActiveEP: {
     id: 70,
@@ -299,6 +327,7 @@ export const perks = {
     family: PERK_FAMILY.ETERNITY,
     description: "Active path multipliers are always maximized.",
     layoutPosList: [56633, 79399, 80599, 80601, 78194, 58565],
+    cost: 3,
   },
   studyIdleEP: {
     id: 71,
@@ -309,6 +338,7 @@ export const perks = {
     },
     effect: 15,
     layoutPosList: [80248, 79401, 81001, 79802, 78994, 56239],
+    cost: 3,
   },
   studyECRequirement: {
     id: 72,
@@ -318,6 +348,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => "Remove EC secondary requirements",
     layoutPosList: [62714, 78600, 81398, 80604, 78600, 40599],
+    cost: 5,
   },
   studyECBulk: {
     id: 73,
@@ -329,6 +360,7 @@ export const perks = {
     automatorPoints: 15,
     shortDescription: () => "Bulk EC Completion",
     layoutPosList: [62741, 78200, 81397, 81004, 78603, 41435],
+    cost: 6,
   },
   retroactiveTP1: {
     id: 80,
@@ -340,6 +372,7 @@ export const perks = {
     },
     effect: 1.5,
     layoutPosList: [111739, 81799, 79800, 79797, 81403, 115434],
+    cost: 6,
   },
   retroactiveTP2: {
     id: 81,
@@ -351,6 +384,7 @@ export const perks = {
     },
     effect: 2,
     layoutPosList: [103757, 82199, 79401, 80196, 81406, 117382],
+    cost: 7,
   },
   retroactiveTP3: {
     id: 82,
@@ -362,6 +396,7 @@ export const perks = {
     },
     effect: 2.5,
     layoutPosList: [96175, 82599, 79400, 80195, 81409, 116540],
+    cost: 8,
   },
   retroactiveTP4: {
     id: 83,
@@ -375,6 +410,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => `${formatX(3)} TP upgrade applies retroactively`,
     layoutPosList: [86984, 82598, 78999, 80595, 81412, 114103],
+    cost: 9,
   },
   autobuyerDilation: {
     id: 100,
@@ -384,6 +420,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Dilation Upgrade Autobuyers",
     layoutPosList: [117401, 81401, 79802, 79799, 80597, 96672],
+    cost: 4,
   },
   autobuyerFasterID: {
     id: 101,
@@ -396,6 +433,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Faster ID Autobuyers",
     layoutPosList: [74095, 80199, 80198, 81000, 82997, 77720],
+    cost: 4,
   },
   autobuyerFasterReplicanti: {
     id: 102,
@@ -408,6 +446,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Faster Replicanti Autobuyers",
     layoutPosList: [57685, 80198, 80197, 80999, 83000, 79297],
+    cost: 5,
   },
   autobuyerFasterDilation: {
     id: 103,
@@ -420,6 +459,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Faster Dilation Autobuyers",
     layoutPosList: [113895, 82602, 79402, 79395, 80609, 72715],
+    cost: 8,
   },
   ttBuySingle: {
     id: 104,
@@ -429,16 +469,18 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Single TT Autobuyer",
     layoutPosList: [44631, 79398, 80598, 81001, 77797, 57325],
+    cost: 4,
   },
-  ttFree: {
-    id: 105,
-    label: "TTF",
-    family: PERK_FAMILY.AUTOMATION,
-    get description() {
-      return `Purchasing Time Theorems no longer spends your Antimatter, Infinity Points, or Eternity Points.`;
-    },
-    layoutPosList: [33840, 78998, 80597, 81002, 77800, 67309],
-  },
+  // ttFree: {
+  //   id: 105,
+  //   label: "TTF",
+  //   family: PERK_FAMILY.AUTOMATION,
+  //   get description() {
+  //     return `Purchasing Time Theorems no longer spends your Antimatter, Infinity Points, or Eternity Points.`;
+  //   },
+  //   layoutPosList: [33840, 78998, 80597, 81002, 77800, 67309],
+  // },
+  // TTF removed since they are always free -- ADfree
   ttBuyMax: {
     id: 106,
     label: "TTM",
@@ -448,8 +490,11 @@ export const perks = {
     },
     automatorPoints: 10,
     shortDescription: () => "Max TT Autobuyer",
-    layoutPosList: [25055, 78598, 80997, 81003, 77803, 65739],
+    // layoutPosList: [25055, 78598, 80997, 81003, 77803, 65739],
+    layoutPosList: [33840, 78998, 80597, 81002, 77800, 67309],
+    cost: 5,
   },
+  // move TTM to where TTF was -- ADFree
   dilationAutobuyerBulk: {
     id: 107,
     label: "DAB",
@@ -461,6 +506,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => "Dilation Autobuyer bulk",
     layoutPosList: [127384, 81400, 79803, 79399, 81000, 103048],
+    cost: 5,
   },
   achievementGroup1: {
     id: 201,
@@ -474,6 +520,7 @@ export const perks = {
     automatorPoints: 5,
     shortDescription: () => `Faster Achievements: every ${formatInt(20)} minutes`,
     layoutPosList: [65386, 80201, 80601, 79801, 79791, 81371],
+    cost: 2,
   },
   achievementGroup2: {
     id: 202,
@@ -485,6 +532,7 @@ export const perks = {
     },
     effect: 8,
     layoutPosList: [54976, 80202, 80602, 79401, 79794, 93780],
+    cost: 3,
   },
   achievementGroup3: {
     id: 203,
@@ -496,6 +544,7 @@ export const perks = {
     },
     effect: 6,
     layoutPosList: [44168, 80602, 80603, 79402, 79797, 83005],
+    cost: 4,
   },
   achievementGroup4: {
     id: 204,
@@ -507,6 +556,7 @@ export const perks = {
     },
     effect: 4,
     layoutPosList: [33760, 81002, 81003, 79403, 79800, 95422],
+    cost: 5,
   },
   achievementGroup5: {
     id: 205,
@@ -519,6 +569,7 @@ export const perks = {
     automatorPoints: 10,
     shortDescription: () => "Keep Achievements on Reality",
     layoutPosList: [23353, 81402, 81403, 79404, 79803, 84639],
+    cost: 6,
   }
 };
 
@@ -557,8 +608,10 @@ export const perkConnections = (function() {
     [p.autobuyerDilation, p.autounlockEU2, p.autounlockDilation1,
       p.bypassECDilation, p.bypassTGReset, p.dilationAutobuyerBulk],
     [p.autobuyerFasterID],
-    [p.ttBuySingle, p.ttFree],
-    [p.ttFree, p.ttBuyMax],
+    // [p.ttBuySingle, p.ttFree],
+    // [p.ttFree, p.ttBuyMax],
+    [p.ttBuySingle, p.ttBuyMax],
+    // connect TTS and TTM since TTF removed -- ADfree
     [p.achievementGroup1, p.achievementGroup2],
     [p.achievementGroup2, p.achievementGroup3],
     [p.achievementGroup3, p.achievementGroup4],

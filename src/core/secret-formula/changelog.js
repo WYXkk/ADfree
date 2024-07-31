@@ -9,6 +9,54 @@ export const changelog = [
    * }
    */
   {
+    date: [2024, 7, 31],
+    name: "The FREE Update",
+    info: `
+Are you being tired of 'Which one do I first buy'? Now introducing - the FREE update!<br>
+<br>
+<b>Major change: Anything that used to cost is now only a requirement.</b><br>
+<br>
+If an upgrade requires another upgrade bought to buy, then its requirement will increase by the other upgrade's
+cost. This is recursive. If there are multiple possible requirements and only at least one is needed, the path
+with lowest total cost will be chosen.<br>
+In most cases, previous tiers of a rebuyable don't count as requirements. Requirements only count things of the
+same level, for example, unlocking Replicanti is not a requirement for Replicanti upgrades.<br>
+Resets are not treated as costing all current, so they still reset things. For example, Dimension Boosts are not
+free by default.<br>
+<br>
+Detailed explanation:
+<ul>
+<li>All kinds of dimension and Tickspeed purchases no longer cost corresponding currencies.</li>
+<li>All kinds of upgrades no longer cost corresponding currencies, but those with other upgrades required to buy
+will increase currency required to represent the requirement.</li>
+<li>Time Theorems no longer cost corresponding currencies.</li>
+<li>Time Studies no longer cost Time Theorems, instead requires the least total Time Theorems to buy it from the top.</li>
+<li>Achievement 126 changes from 'costing 308 OoMs of Replicanti' to 'free once you have 308 OoMs of Replicanti'.</li>
+<li>Since Time Theorems are free by default, the TTF perk is removed. TTM is moved to where TTF was.</li>
+<li>Perks no longer cost your Perk Points, instead requires distance from START plus 1 perks to activate. You can
+change Perk Layout to 'Distance from START' to get a clearer visualization.</li>
+<li>Glyph Sacrifice still requires getting rid of the glyph.</li>
+<li>Pouring Teresa bar no longer costs Reality Machines. Instead, it instantly sets poured amount to current Reality Machines.</li>
+<li>Teresa's Perk Point Shop doesn't cost your Perk Points. (Yes, Music Glyphs are FREE!)</li>
+<li>Effarig's Shop doesn't cost your Relic Shards.</li>
+<li>The Nameless Ones' Shop and hints don't cost your stored game time.</li>
+<li>Discharge and amplify realities still cost stored game time and real time. They are mechanics!</li>
+<li>V's goal reductions no longer cost your Perk Points, but their requirements are cumulative.</li>
+<li>Time Studies also don't cost Space Theorems, similar to Time Theorems.</li>
+<li>Ra's Recollection, Fragmentation and leveling up no longer cost memories.</li>
+<li>Charging Infinity Upgrades still costs the amount you can charge.</li>
+<li>Same as Sacrifice, Glyph Refine still requires getting rid of the glyph.</li>
+<li>Alchemy Reactions don't cost the base resources.</li>
+<li>Creating a Reality Glyph doesn't consume your Reality Alchemy Resource.</li>
+<li>Dark Matter Dimensions upgrades no longer cost Dark Matter.</li>
+<li>Pelle Rifts works similar to Teresa bar. Filling the rift doesn't cost corresponding resources and is instantly
+set to current value.</li>
+<li>Reword the 3rd rift's first milestone to 'You can overfill 2nd rift to 1000%'.</li>
+<li>The e30 Pelle upgrade is enhanced to include the new effect of Achievement 126.</li>
+</ul>
+`
+  },
+  {
     date: [2024, 5, 2],
     name: "Celebrate Android Reality Update",
     info: `

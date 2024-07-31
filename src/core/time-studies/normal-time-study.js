@@ -82,12 +82,14 @@ export class NormalTimeStudyState extends TimeStudyState {
       if (!auto) ImaginaryUpgrade(19).tryShowWarningModal();
       return false;
     }
-    if (this.costsST()) player.celestials.v.STSpent += this.STCost;
+    // if (this.costsST()) player.celestials.v.STSpent += this.STCost;
+    // Cost removed -- ADfree
     player.timestudy.studies.push(this.id);
     player.requirementChecks.reality.maxStudies = Math.clampMin(player.requirementChecks.reality.maxStudies,
       player.timestudy.studies.length);
     if (this.id > 300) player.requirementChecks.reality.noTriads = false;
-    Currency.timeTheorems.subtract(this.cost);
+    // Currency.timeTheorems.subtract(this.cost);
+    // Cost removed -- ADfree
     GameCache.timeStudies.invalidate();
     TimeStudyTree.commitToGameState([TimeStudy(this.id)]);
     if (this.id === 181 && Pelle.isDoomed) Achievement(186).unlock();

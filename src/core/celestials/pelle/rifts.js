@@ -89,14 +89,22 @@ class RiftState extends GameMechanicState {
     return this.config.percentage(this.totalFill);
   }
 
-  get spentPercentage() {
-    return this.rift.percentageSpent || 0;
+  // get spentPercentage() {
+  //   return this.rift.percentageSpent || 0;
+  // }
+  // Reword to overfill -- ADfree
+
+  get maxPercentage() {
+    if (this.id === 2 && (PelleRifts.chaos.milestones[0].isEffectActive || Pelle.hasGalaxyGenerator)) return 10;
+    return 1;
   }
+  // added for uses -- ADfree
 
   get percentage() {
-    if (this.reducedTo > 1) return this.reducedTo;
-    if (!this.config.spendable) return Math.min(this.realPercentage, this.reducedTo);
-    return Math.min(this.config.percentage(this.totalFill) - this.spentPercentage, this.reducedTo);
+    if (this.reducedTo > 1) return this.reducedTo * this.maxPercentage;
+    // if (!this.config.spendable) return Math.min(this.realPercentage, this.reducedTo);
+    return Math.min(this.config.percentage(this.totalFill), this.reducedTo * this.maxPercentage);
+    // Reword to overfill -- ADfree
   }
 
   get milestones() {
@@ -124,11 +132,13 @@ class RiftState extends GameMechanicState {
   }
 
   get maxValue() {
-    return this.config.percentageToFill(1 + this.spentPercentage);
+    return this.config.percentageToFill(this.maxPercentage);
+    // Reword to overfill -- ADfree
   }
 
   get isMaxed() {
-    return this.percentage >= 1;
+    return this.percentage >= this.maxPercentage;
+    // Reword to overfill -- ADfree
   }
 
   get galaxyGeneratorText() {
@@ -156,18 +166,22 @@ class RiftState extends GameMechanicState {
     if (this.fillCurrency.value instanceof Decimal) {
       // Don't drain resources if you only have 1 of it.
       // This is in place due to the fix to replicanti below.
-      if (this.fillCurrency.value.lte(1)) return;
-      const afterTickAmount = this.fillCurrency.value.times((1 - Pelle.riftDrainPercent) ** (diff / 1000));
-      const spent = this.fillCurrency.value.minus(afterTickAmount);
+      // if (this.fillCurrency.value.lte(1)) return;
+      // const afterTickAmount = this.fillCurrency.value.times((1 - Pelle.riftDrainPercent) ** (diff / 1000));
+      // const spent = this.fillCurrency.value.minus(afterTickAmount);
       // We limit this to 1 instead of 0 specifically for the case of replicanti; certain interactions with offline
       // time can cause it to drain to 0, where it gets stuck unless you reset it with some prestige
-      this.fillCurrency.value = this.fillCurrency.value.minus(spent).max(1);
-      this.totalFill = this.totalFill.plus(spent).min(this.maxValue);
+      // this.fillCurrency.value = this.fillCurrency.value.minus(spent).max(1);
+      // this.totalFill = this.totalFill.plus(spent).min(this.maxValue);
+      this.totalFill = this.totalFill.max(this.fillCurrency.value).min(this.maxValue);
+      // make fill instant and cost nothing -- ADfree
     } else {
-      const afterTickAmount = this.fillCurrency.value * (1 - Pelle.riftDrainPercent) ** (diff / 1000);
-      const spent = this.fillCurrency.value - afterTickAmount;
-      this.fillCurrency.value = Math.max(this.fillCurrency.value - spent, 0);
-      this.totalFill = Math.clampMax(this.totalFill + spent, this.maxValue);
+      // const afterTickAmount = this.fillCurrency.value * (1 - Pelle.riftDrainPercent) ** (diff / 1000);
+      // const spent = this.fillCurrency.value - afterTickAmount;
+      // this.fillCurrency.value = Math.max(this.fillCurrency.value - spent, 0);
+      // this.totalFill = Math.clampMax(this.totalFill + spent, this.maxValue);
+      this.totalFill = Math.clampMax(Math.clampMin(this.totalFill, this.fillCurrency.value), this.maxValue);
+      // make fill instant and cost nothing -- ADfree
     }
     if (PelleRifts.vacuum.milestones[0].canBeApplied) Glyphs.refreshActive();
     this.checkMilestoneStates();

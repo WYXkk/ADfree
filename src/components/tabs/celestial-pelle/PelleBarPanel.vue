@@ -51,7 +51,7 @@ export default {
       Rifts can be activated by clicking on their bars.
       <span v-if="strikes.length > 1">You cannot activate more than two Rifts at once.</span>
       <br v-else>
-      When active, Rifts consume {{ formatPercents(decayRate) }} of another resource per second.
+      When active, Rifts drain total instantly jumps to current value of another resource.
       <br>
       Rift effects apply even when not activated, and are based on the total amount drained.
       <b class="o-strike-warning">Pelle Strike penalties are permanent and remain active even after Armageddon!</b>

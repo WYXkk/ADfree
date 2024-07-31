@@ -354,7 +354,9 @@ export const Pelle = {
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
 
-  endTabNames: "End Is Nigh Destruction Is Imminent Help Us Good Bye Forever".split(" "),
+  // endTabNames: "End Is Nigh Destruction Is Imminent Help Us Good Bye Forever".split(" "),
+  endTabNames: "This is it Madeline Just breathe Why are you so nervous :)".split(" "),
+  // Celeste reference because why not -- ADfree
 
   quotes: Quotes.pelle,
 };

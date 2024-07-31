@@ -91,7 +91,7 @@ export default {
           Tickspeed Unpurchasable (EC 9)
         </span>
         <span v-else>
-          Tickspeed Cost: {{ format(cost) }}
+          Tickspeed Req: {{ format(cost) }}
         </span>
         <div
           v-if="hasTutorial"

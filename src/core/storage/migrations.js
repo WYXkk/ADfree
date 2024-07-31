@@ -419,6 +419,23 @@ export const migrations = {
 
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
+    },
+    50: player =>{
+      // since TTF is removed, check if the player has it and refund -- ADfree
+      if(player.reality.perks.has(105)) {
+        player.reality.perks.delete(105);
+        player.reality.perkPoints += 1;
+      }
+      // since TT is remake to requirement, it is needed to correct total amount -- ADfree
+      player.timestudy.theorem = player.timestudy.theorem.max(
+        player.timestudy.amBought +
+        player.timestudy.ipBought +
+        player.timestudy.epBought
+      )
+      // delete spentPercent since reword to overfill -- ADfree
+      delete player.celestials.pelle.rifts.decay.percentageSpent;
+      // delete S33 completion :blob: -- ADfree
+      player.secretAchievementBits[2] &= 251;
     }
   },
 

@@ -13,7 +13,8 @@ export default {
   },
   computed: {
     willHardReset() {
-      return this.input === "Shrek is love, Shrek is life";
+      return this.input === "I had a very good idea, I used F5";
+      // Kenadian reference -- ADfree
     },
     hasExtraNG() {
       return player.records.fullGameCompletions > 0;
@@ -47,7 +48,7 @@ export default {
     <div class="c-modal-message__text">
       Please confirm your desire to hard reset this save slot.
       <span class="c-modal-hard-reset-danger">Deleting your save will not unlock anything secret.</span>
-      Type in "Shrek is love, Shrek is life" to confirm.
+      Type in "I had a very good idea, I used F5" to confirm.
       <div class="c-modal-hard-reset-danger">
         THIS WILL WIPE YOUR SAVE.
         <span v-if="hasExtraNG">
@@ -75,7 +76,7 @@ export default {
         Phrase confirmed - continuing will irreversibly delete your save!
       </div>
       <div v-else>
-        Type in the correct phrase to hard reset.
+        Using F5 can give you a whole new perspective.
       </div>
     </div>
     <template #confirm-text>

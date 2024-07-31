@@ -92,17 +92,19 @@ export default {
       this.dilatedTime.copyFrom(Currency.dilatedTime);
       const rawDTGain = getDilationGainPerSecond().times(getGameSpeedupForDisplay());
       this.galaxyTimeEstimate = getDilationTimeEstimate(this.galaxyThreshold);
-      if (PelleRifts.paradox.isActive) {
-        // The number can be small and either positive or negative with the rift active, which means that extra care
-        // needs to be taken to get the calculation as close to correct as possible. This relies on some details
-        // related to tick microstructure to make things accurate, and it seems to be to roughly 1 part in 5e6
-        const tickProp = player.options.updateRate / 1000;
-        const drainFactorPerTick = 1 - (1 - Pelle.riftDrainPercent) ** tickProp;
-        const drainPerSecond = this.dilatedTime.add(rawDTGain.times(tickProp)).times(drainFactorPerTick / tickProp);
-        this.dilatedTimeIncome = rawDTGain.minus(drainPerSecond);
-      } else {
-        this.dilatedTimeIncome = rawDTGain;
-      }
+      // if (PelleRifts.paradox.isActive) {
+      //   // The number can be small and either positive or negative with the rift active, which means that extra care
+      //   // needs to be taken to get the calculation as close to correct as possible. This relies on some details
+      //   // related to tick microstructure to make things accurate, and it seems to be to roughly 1 part in 5e6
+      //   const tickProp = player.options.updateRate / 1000;
+      //   const drainFactorPerTick = 1 - (1 - Pelle.riftDrainPercent) ** tickProp;
+      //   const drainPerSecond = this.dilatedTime.add(rawDTGain.times(tickProp)).times(drainFactorPerTick / tickProp);
+      //   this.dilatedTimeIncome = rawDTGain.minus(drainPerSecond);
+      // } else {
+      //   this.dilatedTimeIncome = rawDTGain;
+      // }
+      this.dilatedTimeIncome = rawDTGain;
+      // Drain cost removed -- ADfree
       this.galaxyThreshold.copyFrom(player.dilation.nextThreshold);
       this.baseGalaxies = player.dilation.baseTachyonGalaxies;
       this.totalGalaxies = player.dilation.totalTachyonGalaxies;

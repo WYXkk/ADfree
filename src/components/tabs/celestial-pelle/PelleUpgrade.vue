@@ -96,7 +96,8 @@ export default {
       this.galaxyCap = GalaxyGenerator.generationCap;
       const genDB = GameDatabase.celestials.pelle.galaxyGeneratorUpgrades;
       this.notAffordable = (this.config === genDB.additive || this.config === genDB.multiplicative) &&
-        (Decimal.gt(this.upgrade.cost, this.galaxyCap - GalaxyGenerator.generatedGalaxies + player.galaxies));
+        (Decimal.gt(this.upgrade.cost, this.galaxyCap - GalaxyGenerator.spentGalaxies + player.galaxies));
+      // lol there is a bug in vanilla. let's fix it -- ADfree
     },
     secondsUntilCost(rate) {
       const value = this.galaxyGenerator ? player.galaxies + GalaxyGenerator.galaxies : Currency.realityShards.value;

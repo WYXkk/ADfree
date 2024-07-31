@@ -73,12 +73,16 @@ export function buyDilationUpgrade(id, bulk = 1) {
     const upgAmount = player.dilation.rebuyables[id];
     if (Currency.dilatedTime.lt(upgrade.cost) || upgAmount >= upgrade.config.purchaseCap) return false;
 
-    let buying = Decimal.affordGeometricSeries(Currency.dilatedTime.value,
-      upgrade.config.initialCost, upgrade.config.increment, upgAmount).toNumber();
+    // let buying = Decimal.affordGeometricSeries(Currency.dilatedTime.value,
+    //   upgrade.config.initialCost, upgrade.config.increment, upgAmount).toNumber();
+    let buying = Math.floor(new Decimal(Currency.dilatedTime.value).divide(upgrade.config.initialCost)
+      .log(upgrade.config.increment) + 1 - upgAmount);
+    // no need for geometric series calculation since free -- ADfree
     buying = Math.clampMax(buying, bulk);
     buying = Math.clampMax(buying, upgrade.config.purchaseCap - upgAmount);
     const cost = Decimal.sumGeometricSeries(buying, upgrade.config.initialCost, upgrade.config.increment, upgAmount);
-    Currency.dilatedTime.subtract(cost);
+    // Currency.dilatedTime.subtract(cost);
+    // Cost removed -- ADfree
     player.dilation.rebuyables[id] += buying;
     if (id === 2) {
       if (!Perk.bypassTGReset.isBought || Pelle.isDoomed) Currency.dilatedTime.reset();
@@ -202,13 +206,14 @@ export function getDilationTimeEstimate(goal) {
   const rawDTGain = currentDTGain.times(getGameSpeedupForDisplay());
   const currentDT = Currency.dilatedTime.value;
   if (currentDTGain.eq(0)) return null;
-  if (PelleRifts.paradox.isActive) {
-    const drain = Pelle.riftDrainPercent;
-    const goalNetRate = rawDTGain.minus(Decimal.multiply(goal, drain));
-    const currNetRate = rawDTGain.minus(currentDT.times(drain));
-    if (goalNetRate.lt(0)) return "Never affordable due to Rift drain";
-    return TimeSpan.fromSeconds(currNetRate.div(goalNetRate).ln() / drain).toTimeEstimate();
-  }
+  // if (PelleRifts.paradox.isActive) {
+  //   const drain = Pelle.riftDrainPercent;
+  //   const goalNetRate = rawDTGain.minus(Decimal.multiply(goal, drain));
+  //   const currNetRate = rawDTGain.minus(currentDT.times(drain));
+  //   if (goalNetRate.lt(0)) return "Never affordable due to Rift drain";
+  //   return TimeSpan.fromSeconds(currNetRate.div(goalNetRate).ln() / drain).toTimeEstimate();
+  // }
+  // since rift drain is free, it is no longer need to consider -- ADfree
   return TimeSpan.fromSeconds(Decimal.sub(goal, currentDT)
     .div(rawDTGain).toNumber()).toTimeEstimate();
 }
