@@ -8,7 +8,7 @@ export default {
   },
   computed: {
     upgrades: () => RealityUpgrades.all,
-    costScalingTooltip: () => `Prices start increasing faster above ${format(1e30)} RM and then even faster
+    costScalingTooltip: () => `Requirements start increasing faster above ${format(1e30)} RM and then even faster
       above ${format(Decimal.NUMBER_MAX_VALUE, 1)} RM`,
     possibleTooltip: () => `Checkered upgrades are impossible to unlock this Reality. Striped upgrades are
       still possible.`,
