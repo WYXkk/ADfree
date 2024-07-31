@@ -142,7 +142,7 @@ export default {
           </div>
         </div>
         <div class="c-ra-pet-upgrade__tooltip__footer">
-          Cost: {{ quantify("Memory", requiredMemories, 2, 2) }}
+          Req: {{ quantify("Memory", requiredMemories, 2, 2) }}
           <span v-if="memories <= requiredMemories">{{ nextLevelEstimate }}</span>
         </div>
       </div>

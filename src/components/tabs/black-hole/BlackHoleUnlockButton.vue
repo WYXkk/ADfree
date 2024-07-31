@@ -33,7 +33,7 @@ export default {
   >
     Unleash the Black Hole
     <br>
-    Cost: {{ formatInt(100) }} Reality Machines
+    Req: {{ formatInt(100) }} Reality Machines
   </button>
 </template>
 

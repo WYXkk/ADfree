@@ -174,7 +174,7 @@ export default {
                   Gain {{ formatPercents(0.3) }} more Memories
                 </div>
                 <div class="c-ra-pet-upgrade__tooltip__footer">
-                  Cost: {{ quantify("Memory", memoryUpgradeCost, 2, 2) }}
+                  Req: {{ quantify("Memory", memoryUpgradeCost, 2, 2) }}
                   <span v-if="memories <= memoryUpgradeCost">
                     {{ nextMemoryUpgradeEstimate }}
                   </span>
@@ -218,7 +218,7 @@ export default {
                   Gain {{ formatPercents(0.5) }} more Memory Chunks
                 </div>
                 <div class="c-ra-pet-upgrade__tooltip__footer">
-                  Cost: {{ quantify("Memory", chunkUpgradeCost, 2, 2) }}
+                  Req: {{ quantify("Memory", chunkUpgradeCost, 2, 2) }}
                   <span v-if="memories <= chunkUpgradeCost">
                     {{ nextMemoryChunkUpgradeEstimate }}
                   </span>

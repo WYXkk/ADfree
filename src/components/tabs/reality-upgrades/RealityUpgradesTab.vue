@@ -28,7 +28,7 @@ export default {
     <div class="c-reality-upgrade-infotext">
       Mouseover <i class="fas fa-question-circle" /> icons for additional information.
       <br>
-      The first row of upgrades can be purchased endlessly for increasing costs
+      The first row of upgrades can be purchased endlessly for increasing requirements
       <span :ach-tooltip="costScalingTooltip">
         <i class="fas fa-question-circle" />
       </span>
@@ -41,7 +41,7 @@ export default {
       </span>
       <br>
       Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
+      their effect, current bonus, and requirement. Hold shift to swap this behavior.
       <br>
       You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
       from doing anything this Reality which would cause you to fail their unlock condition.
