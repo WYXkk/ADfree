@@ -64,7 +64,7 @@ export default {
       return `Unlock: ${format(this.ttCost)} TT`;
     },
     formattedEPCost() {
-      return this.isCapped ? "Capped" : `${this.showCostTitle ? "Cost: " : ""}${format(this.cost, 2)} EP`;
+      return this.isCapped ? "Capped" : `${this.showCostTitle ? "Req: " : ""}${format(this.cost, 2)} EP`;
     },
     hasLongText() {
       return this.buttonContents.length > 20;
