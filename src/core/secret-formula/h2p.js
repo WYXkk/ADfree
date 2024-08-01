@@ -186,12 +186,12 @@ Most of the effects and upgrades in Antimatter Dimensions largely fall into thre
 - <b>Additive:</b> These effects are typically denoted with a + (or the word "increase") followed by a number,
 and add their value to some
 base amount. Multiple additive effects are summed up. These can also sometimes show up as subtractive effects which
-reduce resource costs.
+reduce resource requirements.
 <br>
 - <b>Multiplicative:</b> These effects are shown either by a × (or the word "multiply") followed by a number or,
 more rarely, as two numbers
 separated by a ➜. Different multiplicative sources always combine by multiplying, never by adding. In some situations,
-there may be negative effects or cost reductions that apply in this category as division.
+there may be negative effects or requirement reductions that apply in this category as division.
 <br>
 - <b>Power</b>: These effects are much rarer and appear as ^ followed by a number. Multiple power effects apply
 sequentially, or equivalently by multiplying the values of the power effects together and applying the final value
@@ -257,7 +257,7 @@ ${Laitela.isUnlocked ? "- <b>DE</b>: Dark Energy<br>" : ""}
       info: () => `
 Antimatter is a resource that is used throughout the entire game for purchasing various things as you progress. You
 start with ${formatInt(10)} antimatter when you first open the game, and you can
-spend it to buy the 1st Antimatter Dimension to start the game.
+use it to buy the 1st Antimatter Dimension to start the game.
 <br>
 <br>
 Antimatter Dimensions are your production units in game. The 1st Antimatter Dimension produces your antimatter.
@@ -287,8 +287,8 @@ Dimension experiences per second. ${formatPercents(1)} means the dimension is do
 This allows you to judge overall growth.
 <br>
 <br>
-<b>Cost &amp; until ${formatInt(10)}:</b>
-You can buy a single quantity of each Dimension with antimatter when the cost button is highlighted.
+<b>Req &amp; until ${formatInt(10)}:</b>
+You can buy a single quantity of each Dimension with antimatter when the requirement button is highlighted.
 Alternatively, if the Until ${formatInt(10)} button is highlighted,
 you can buy whatever quantity gets you to that Dimension's next Dimension multiplier.
 <br>
@@ -325,7 +325,7 @@ boosting production as if part of a game tick has passed. Note that the actual t
 game always runs calculations at the update rate you've chosen in the Options tab.
 <br>
 <br>
-<b>Cost:</b> The cost of antimatter for multiplying ticks/sec by the displayed multiplier.
+<b>Req:</b> The antimatter requirement for multiplying ticks/sec by the displayed multiplier.
 (without any Galaxies, this is ${formatX(1.1245, 0, 3)} per purchase)
 <br>
 <br>
@@ -346,7 +346,7 @@ with your current amount of antimatter.
 Antimatter Dimension for you to purchase and boosts your Dimension multipliers.
 The 1st Dimension Boost requires ${formatInt(20)} 4th Dimensions, the 2nd requires ${formatInt(20)} 5th Dimensions, etc.
 After unlocking all ${formatInt(8)} Dimensions,
-every additional boost will cost ${formatInt(15)} more 8th Dimensions than the previous Boost and will no longer
+every additional boost will require ${formatInt(15)} more 8th Dimensions than the previous Boost and will no longer
 unlock a Dimension, but will continue to increase your Dimension multipliers.
 <br>
 <br>
@@ -373,14 +373,14 @@ Though it will have very little impact for the first few Tickspeed purchases,
 the increase is multiplicative and will not take long to be visible.
 <br>
 <br>
-Your first Antimatter Galaxy requires ${formatInt(80)} Eighth Dimensions, and each additional Galaxy will cost
+Your first Antimatter Galaxy requires ${formatInt(80)} Eighth Dimensions, and each additional Galaxy will require
 another ${formatInt(60)} more.
 <br>
-<b>Distant Galaxy scaling:</b> Above ${formatInt(100)} Antimatter Galaxies the cost increase between Galaxies will
-increase by ${formatInt(2)} per Galaxy, making the next Galaxy cost ${formatInt(62)} more, then ${formatInt(64)} more,
-etc.
+<b>Distant Galaxy scaling:</b> Above ${formatInt(100)} Antimatter Galaxies the requirement increase between Galaxies
+will increase by ${formatInt(2)} per Galaxy, making the next Galaxy require ${formatInt(62)} more, then ${formatInt(64)}
+more, etc.
 <br>
-<b>Remote Galaxy scaling:</b> Above ${formatInt(Galaxy.remoteStart)} Antimatter Galaxies, the <i>total</i> cost
+<b>Remote Galaxy scaling:</b> Above ${formatInt(Galaxy.remoteStart)} Antimatter Galaxies, the <i>total</i> requirement
 increases by another ${formatPercents(0.002, 1)} per Galaxy, on top of Distant scaling.
 <br>
 <br>
@@ -396,7 +396,7 @@ increases by another ${formatPercents(0.002, 1)} per Galaxy, on top of Distant s
 <br>
 <br>
 Sacrificing will immediately reset the owned quantity of all non-Eighth Dimensions to zero, without reducing the
-multiplier or the current cost. In return, it will multiply the Eighth Dimension Multiplier by the shown value.
+multiplier or the current requirement. In return, it will multiply the Eighth Dimension Multiplier by the shown value.
 It will take time to get back to the production you previously had, but you will end up with a net increase.
 <br>
 <br>
@@ -560,10 +560,10 @@ ${formatPostBreak(Number.MAX_VALUE, 2)} antimatter you gain (in a continuous man
 nearest integer <i>after</i> all multipliers are applied.
 <br>
 <br>
-The antimatter costs of all Dimensions begin to increase faster after they pass
-${formatPostBreak(Number.MAX_VALUE, 2)}. The cost <i>between</i> upgrades will increase by ${formatX(10)}
+The antimatter requirements of all Dimensions begin to increase faster after they pass
+${formatPostBreak(Number.MAX_VALUE, 2)}. The requirement <i>between</i> upgrades will increase by ${formatX(10)}
 <i>per upgrade</i> above ${formatPostBreak(Number.MAX_VALUE, 2)}, and a similar scaling happens to
-Tickspeed Upgrade costs as well.
+Tickspeed Upgrade requirements as well.
 `,
       isUnlocked: () => Autobuyer.bigCrunch.hasMaxedInterval || PlayerProgress.eternityUnlocked(),
       tags: ["limit", "crunch", "upgrades", "midgame"],
@@ -574,7 +574,7 @@ Tickspeed Upgrade costs as well.
 <b>Unlocking Infinity Dimensions:</b> Infinity Dimensions are unlocked by reaching a certain amount of antimatter.
 <br>
 <br>
-<b>Infinity Dimension Purchasing:</b> Infinity Dimensions are only purchasable in sets of ${formatInt(10)}, and cost
+<b>Infinity Dimension Purchasing:</b> Infinity Dimensions are only purchasable in sets of ${formatInt(10)}, and require
 Infinity Points. They give a permanent multiplier per purchase, similar to the other dimensions. The actual multiplier
 applied depends on which Infinity Dimension you purchase. <!-- Sorry Garnet :/ -->
 <br>
@@ -637,7 +637,7 @@ Replicanti are another resource you unlock at ${format(DC.E140)} IP. Rather
 than producing something else, Replicanti actually produces <i>itself</i> up to a maximum of
 ${formatPostBreak(Number.MAX_VALUE, 2)}. Replicanti are produced at their own pace, unaffected by Tickspeed Upgrades.
 Each individual Replicanti has a certain chance (initially ${formatPercents(0.01)}) of producing another Replicanti
-every Replicanti tick (initially every second), and both of these can be upgraded by spending IP.
+every Replicanti tick (initially every second), and both of these can be upgraded using IP.
 <br>
 <br>
 If you have purchased a Replicanti Galaxy upgrade, then you can get a "free" Replicanti Galaxy in exchange for
@@ -652,14 +652,15 @@ Replicanti give a multiplier to all Infinity Dimensions, which will reach a maxi
 ${formatX(Math.pow(2, 20), 2, 2)} at ${formatPostBreak(Number.MAX_VALUE, 2)} Replicanti.
 <br>
 <br>
-<b>Chance upgrade cost:</b> Base ${format(DC.E150)} IP, cost increment ${formatX(DC.E15)} IP
+<b>Chance upgrade requirement:</b> Base ${format(DC.E150)} IP, requirement increment ${formatX(DC.E15)} IP
 <br>
-<b>Interval upgrade cost:</b> Base ${format(DC.E140)} IP, cost increment ${formatX(DC.E10)} IP
+<b>Interval upgrade requirement:</b> Base ${format(DC.E140)} IP, requirement increment ${formatX(DC.E10)} IP
 <br>
-<b>Galaxy upgrade cost:</b> Base ${format(DC.E170)} IP, cost increment ${formatX(DC.E25)} IP and an additional
-${formatX(1e5)} IP per upgrade, scaling similarly to distant Antimatter Galaxies. Above ${formatInt(100)} Replicanti
-Galaxies, this ${formatX(1e5)} per upgrade changes to ${formatX(DC.E55)}. Above ${formatInt(1000)}, the scaling switches
-from quadratic to cubic, with the ${formatX(DC.E55)} multiplier itself increasing by ${formatX(DC.E5)} per upgrade.
+<b>Galaxy upgrade requirement:</b> Base ${format(DC.E170)} IP, requirement increment ${formatX(DC.E25)} IP and an
+additional ${formatX(1e5)} IP per upgrade, scaling similarly to distant Antimatter Galaxies. Above ${formatInt(100)}
+Replicanti Galaxies, this ${formatX(1e5)} per upgrade changes to ${formatX(DC.E55)}. Above ${formatInt(1000)}, the
+scaling switches from quadratic to cubic, with the ${formatX(DC.E55)} multiplier itself increasing by ${formatX(DC.E5)}
+per upgrade.
 `,
       isUnlocked: () => Replicanti.areUnlocked || PlayerProgress.eternityUnlocked(),
       tags: ["interval", "chance", "infinity", "galaxy", "galaxies", "midgame"],
@@ -718,7 +719,7 @@ properly, as noted on the milestone page itself.
       info: () => `
 After your first Eternity, you unlock Time Dimensions. You buy them with Eternity Points and they produce Time Shards,
 which provide Tickspeed Upgrades. These Tickspeed Upgrades function like normal Tickspeed Upgrades but do not increase
-their cost. Time Dimensions, Time Shards, and the Tickspeed Upgrades they provide are kept on Infinity,
+their requirement. Time Dimensions, Time Shards, and the Tickspeed Upgrades they provide are kept on Infinity,
 but reset every Eternity.
 <br>
 <br>
@@ -727,13 +728,13 @@ Dimensions, your production will be reset to the amount you purchased after ever
 upgrades to your multipliers you purchased.
 <br>
 <br>
-Each purchase increases the multiplier of that specific Time Dimension by ${formatX(4)}. The cost multiplier between
-upgrades has a base value, but is increased by ${formatX(1.5, 1, 1)} at
+Each purchase increases the multiplier of that specific Time Dimension by ${formatX(4)}. The requirement multiplier
+between upgrades has a base value, but is increased by ${formatX(1.5, 1, 1)} at
 ${format(TimeDimension(1)._costIncreaseThresholds[0], 2)} EP and ${formatX(2.2, 1, 1)} (of the base value) at
-${format(TimeDimension(1)._costIncreaseThresholds[1])} EP. These increases apply retroactively, causing the cost to
-jump when they reach those thresholds, and only apply to the first four dimensions. Beyond
+${format(TimeDimension(1)._costIncreaseThresholds[1])} EP. These increases apply retroactively, causing the requirement
+to jump when they reach those thresholds, and only apply to the first four dimensions. Beyond
 ${format(TimeDimension(1)._costIncreaseThresholds[2])} EP each dimension purchase counts as four purchases for the
-purpose of cost increases, causing the price to rise much more steeply.
+purpose of requirement increases, causing the price to rise much more steeply.
 <br>
 <b>Time Dimension base prices (EP):</b> ${Array.range(1, 8)
     .map(tier => format(TimeDimension(tier)._baseCost))
@@ -755,12 +756,12 @@ per ${formatInt(50000)} upgrades (${formatX(1.000006, 0, 6)} per upgrade).
     }, {
       name: "Time Studies",
       info: () => `
-A Time Study is a powerful post-Eternity upgrade, which costs a new resource called Time Theorems. Time Studies can
+A Time Study is a powerful post-Eternity upgrade, which requires a new resource called Time Theorems. Time Studies can
 boost the production of anything you have seen so far in the game, or even change the way some formulas work.
 <br>
 <br>
-Time Theorems are a limited resource which costs more for each one you buy. They can be bought with antimatter,
-Infinity Points, or Eternity Points. Their cost increases by a set factor per purchase. Time Theorems do not
+Time Theorems are a limited resource which requires more for each one you buy. They can be bought with antimatter,
+Infinity Points, or Eternity Points. Their requirement increases by a set factor per purchase. Time Theorems do not
 reset on Eternity.
 <br>
 <br>
@@ -807,7 +808,7 @@ spent on them. It can be done for free, but only triggers on finishing an Eterni
 the middle of an Eternity.
 <br>
 <br>
-<b>Costs for Time Theorems:</b>
+<b>Requirement for Time Theorems:</b>
 <br>
 <b>Antimatter:</b> Initially ${format(DC.E20000)}, ${formatX(DC.E20000)} per Theorem
 <br>
@@ -836,7 +837,7 @@ You can only have one Eternity Challenge unlocked at a time.
 <br>
 You can complete each Eternity Challenge up to five times. After each completion, the rewards grow stronger but the
 goal to the next completion also increases. Additionally, the secondary requirement to unlock the challenge again will
-also increase. The Time Theorem cost does not increase.
+also increase. The Time Theorem requirement does not increase.
 <br>
 <br>
 Completing an Eternity Challenge's secondary requirements will remove them from the study requirement until you complete
@@ -852,7 +853,7 @@ if you respec your time studies.
       name: "Time Dilation",
       info: () => `
 Time Dilation is unlocked when you purchase the Time Study to unlock it below the EC11 and EC12 studies.
-In order to purchase this Time Study, you need ${formatInt(5000)} unspent TT with a tree that can reach
+In order to purchase this Time Study, you need ${formatInt(7113)} TT with a tree that can reach
 the study, a <i>total</i> of ${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)} TT, and must have
 completed both EC11 and EC12 five times each.
 <br>
@@ -871,8 +872,8 @@ you have gained a TP multiplier or are able to significantly increase your antim
 <br>
 Tachyon Particles generate another currency called Dilated Time. Dilated Time is translated into Tachyon Galaxies by
 reaching thresholds similarly to the Tickspeed Upgrades gained from Time Dimensions. These Tachyon Galaxies are like
-Replicanti Galaxies in that they affect tickspeed as if they were Antimatter Galaxies but they do not increase the cost
-of your next Antimatter Galaxy.
+Replicanti Galaxies in that they affect tickspeed as if they were Antimatter Galaxies but they do not increase the
+requirement of your next Antimatter Galaxy.
 <br>
 <br>
 Unlocking Time Dilation also unlocks upgrades you can purchase using Dilated Time. The first and third upgrades in the
@@ -1173,21 +1174,22 @@ automatically ${BlackHoles.ACCELERATION_TIME} real-time seconds before activatio
 the Black Hole tab.
 <br>
 <br>
-<b>Upgrade Cost Information:</b>
+<b>Upgrade Requirement Information:</b>
 <br>
-<b>Interval</b> - Base cost of ${formatInt(15)} RM and increase of ${formatX(3.5, 0, 1)} per upgrade.
+<b>Interval</b> - Base requirement of ${formatInt(15)} RM and increase of ${formatX(3.5, 0, 1)} per upgrade.
 <br>
-<b>Power</b> - Base cost of ${formatInt(20)} RM and increase of ${formatX(2)} per upgrade.
+<b>Power</b> - Base requirement of ${formatInt(20)} RM and increase of ${formatX(2)} per upgrade.
 <br>
-<b>Duration</b> - Base cost of ${formatInt(10)} RM and increase of ${formatX(4)} per upgrade.
+<b>Duration</b> - Base requirement of ${formatInt(10)} RM and increase of ${formatX(4)} per upgrade.
 <br>
-<b>Increased cost scaling:</b> Above ${format(1e30)} RM, the cost multiplier between purchases increases by an additive
-+${format(0.2, 0, 1)} per upgrade. Above ${format(Number.MAX_VALUE, 1)} RM, a new scaling occurs which ignores all the
-previous behavior. From this point, all upgrades instead behave as if they had an initial cost of ${format(DC.E310)}
-and further upgrade costs increase by ${format(1e6)}, ${format(1e7)}, and so on (${formatX(10)} between upgrades).
+<b>Increased requirement scaling:</b> Above ${format(1e30)} RM, the requirement multiplier between purchases increases
+by an additive +${format(0.2, 0, 1)} per upgrade. Above ${format(Number.MAX_VALUE, 1)} RM, a new scaling occurs which
+ignores all the previous behavior. From this point, all upgrades instead behave as if they had an initial requirement of
+${format(DC.E310)} and further upgrade requirement increase by ${format(1e6)}, ${format(1e7)}, and so on (${formatX(10)}
+between upgrades).
 <br>
-<b>Black Hole 2:</b> All upgrades have an initial cost ${formatX(1000)} higher than the first Black Hole,
-but the same cost multipliers.
+<b>Black Hole 2:</b> All upgrades have an initial requirement ${formatX(1000)} higher than the first Black Hole,
+but the same requirement multipliers.
 <br>
 <br>
 <b>Hotkey: B</b> will pause/unpause the Black Holes.
@@ -1399,9 +1401,10 @@ lasted ${format(0.2, 2, 2)} seconds, you will use ${formatInt(200)} seconds to s
 You can toggle a setting to automatically store offline time as stored real time.
 <br>
 <br>
-Their first unlock costs ${format(TimeSpan.fromMilliseconds(ENSLAVED_UNLOCKS.FREE_TICKSPEED_SOFTCAP.price).totalYears)}
-years of stored game time. It increases the softcap to Tickspeed Upgrades gained from Time Dimensions
-(the point at which their cost starts increasing faster)
+Their first unlock requires
+${format(TimeSpan.fromMilliseconds(ENSLAVED_UNLOCKS.FREE_TICKSPEED_SOFTCAP.price).totalYears)} years of stored game
+time. It increases the softcap to Tickspeed Upgrades gained from Time Dimensions
+(the point at which their requirement starts increasing faster)
 by ${format(1e5)} Tickspeed Upgrades.
 <br>
 <br>
@@ -1430,14 +1433,15 @@ which limits how large their multipliers can grow since eventually you cannot up
 Tesseracts allow you to raise this cap by spending Infinity Points.
 <br>
 <br>
-The cost of Tesseracts increases super-exponentially, but each successive Tesseract is significantly stronger than
-the last in order to make up for that. Tesseract count is never reset, meaning that once purchased, you do not need
-to reach the IP cost again in order to take advantage of the raised cap in later Realities.
+The requirement of Tesseracts increases super-exponentially, but each successive Tesseract is significantly stronger
+than the last in order to make up for that. Tesseract count is never reset, meaning that once purchased, you do not need
+to reach the IP requirement again in order to take advantage of the raised cap in later Realities.
 <br>
 <br>
-You can see additional information about your current Tesseract count and the cost of the next one in the Infinity
-Dimensions tab. Additionally, your current Infinity Points will now also show a percentage towards the next Tesseract.
-If affordable, the Infinity button itself will visually change and bring you to the Infinity Dimension tab when clicked.
+You can see additional information about your current Tesseract count and the requirement for the next one in the
+Infinity Dimensions tab. Additionally, your current Infinity Points will now also show a percentage towards the next
+Tesseract. If affordable, the Infinity button itself will visually change and bring you to the Infinity Dimension tab
+when clicked.
 `,
       isUnlocked: () => Enslaved.isCompleted,
       tags: ["reality", "lategame", "endgame", "tesseract", "id", "celestial"],
@@ -1454,7 +1458,7 @@ without buying 8th Antimatter Dimensions in your current Infinity.
 <br>
 After the subtab is unlocked from the Achievement, you are met with another set of requirements to fully unlock V.
 You must have completed ${formatInt(GameDatabase.celestials.v.mainUnlock.realities.requirement)} Realities and have
-${format(GameDatabase.celestials.v.mainUnlock.realityMachines.requirement)} unspent RM.
+${format(GameDatabase.celestials.v.mainUnlock.realityMachines.requirement)} RM.
 Additionally you need to reach ${format(GameDatabase.celestials.v.mainUnlock.eternities.requirement)} Eternities,
 ${format(GameDatabase.celestials.v.mainUnlock.infinities.requirement)} Infinities,
 ${format(GameDatabase.celestials.v.mainUnlock.dilatedTime.requirement)} Dilated Time, and
@@ -1480,8 +1484,8 @@ ${VUnlocks.vAchievementUnlock.isUnlocked
       <br>
       <br>
       The goal reduction unlocked by having ${formatInt(2)} V-Achievements allows you to make some V-Achievement
-      requirements easier to complete by spending Perk Points, down to a limit of whatever the easiest tier requires.
-      The cost of reducing a goal does not increase as it is used, and will also reduce future tiers as well.
+      requirements easier to complete by using Perk Points, down to a limit of whatever the easiest tier requires.
+      The requirement for reducing a goal increases as it is used, and will also reduce future tiers as well.
       <br>
       <br>
       Space Theorems allow you to purchase Time Studies which are normally forbidden, such as multiple paths in the
@@ -1515,7 +1519,7 @@ ${formatInt(Ra.remembrance.requiredLevels)} levels across all Celestials unlocks
 which allows you to choose a particular Celestial to gain more chunks while inside of Ra's Reality.
 <br>
 <br>
-Memories can be spent on three things - an increase to Memory Chunk gain, an increase to Memory gain, and leveling up
+Memories can be used on three things - an increase to Memory Chunk gain, an increase to Memory gain, and leveling up
 the Celestial. You start Ra with only Teresa unlocked and each successive Celestial is unlocked by reaching level
 ${formatInt(8)} with the previous Celestial. Levels are capped at ${formatInt(25)}.
 <br>
@@ -1539,9 +1543,9 @@ ${Ra.unlocks.enslavedUnlock.canBeApplied
 <br>
 V unlocks
 ${Ra.unlocks.vUnlock.canBeApplied
-    ? "Triad Studies, which are new studies near the bottom of the tree which cost Space Theorems. Each Triad Study " +
-      "requires you to also have the three nearby studies as well in order to purchase them. They also unlock a " +
-      "smaller set of more difficult V-Achievements to complete for additional Space Theorems."
+    ? "Triad Studies, which are new studies near the bottom of the tree which require Space Theorems. Each Triad " +
+      "Study requires you to also have the three nearby studies as well in order to purchase them. They also unlock " +
+      "a smaller set of more difficult V-Achievements to complete for additional Space Theorems."
     : "<span style='color: var(--color-bad);'>(unlock V within Ra to see unlock details)</span>"}
 <br>
 <br>
@@ -1619,7 +1623,7 @@ at ${format(MachineHandler.baseRMCap)}; you will be unable to gain any more past
 <br>
 <br>
 Additionally you unlock the Imaginary Upgrades tab, which contains a set of upgrades similar to the Reality Upgrades -
-each upgrade has a condition you must fulfill to unlock it and an Imaginary Machine cost to actually purchase it.
+each upgrade has a condition you must fulfill to unlock it and an Imaginary Machine requirement to actually purchase it.
 The first two rows of upgrades can be repeatedly bought, while the other three are one-time upgrades.
 <br>
 <br>
@@ -1701,12 +1705,12 @@ an appropriate portion of their multiplier.
 The purchase buttons for Antimatter Dimensions and Tickspeed Upgrades become modified to display the number of upgrades
 you would be able to purchase if Continuum was inactive, and the purchase count is scaled smoothly with antimatter.
 For example, having ${format(2e7)} antimatter will give you a Continuum value of ${format(5.3, 0, 1)} for tickspeed
-(initial cost of ${format(1e3)} and increase of ${formatX(10)}) since you can purchase it ${formatInt(5)} times and
-are roughly ${formatPercents(0.3)} of the way to the next. Tickspeed Continuum in this case will then
+(initial requirement of ${format(1e3)} and increase of ${formatX(10)}) since you can purchase it ${formatInt(5)} times
+and are roughly ${formatPercents(0.3)} of the way to the next. Tickspeed Continuum in this case will then
 give a production boost equal to (upgrade multiplier)<sup>${format(5.3, 0, 1)}</sup>.
 <br>
 <br>
-Some upgrades will multiply Continuum value directly, which gives a production boost without affecting the cost
+Some upgrades will multiply Continuum value directly, which gives a production boost without affecting the requirement
 scaling. However, these upgrades will not function if Continuum is disabled on the Autobuyers page, which may result
 in a loss of production if disabled. Continuum makes your autobuyers for Antimatter Dimensions and Tickspeed obsolete,
 so all the related autobuyer settings for these autobuyers are now hidden on that tab as long as Continuum is active.
@@ -1773,7 +1777,7 @@ ${Pelle.isDoomed
       <br>
       Remnants are a new currency gained on Armageddon resets. Remnant gain is based on your best ever antimatter,
       Infinity Points, and Eternity Points across all Doomed Realities. Remnants produce Reality Shards which can be
-      spent on Pelle Upgrades.
+      used on Pelle Upgrades.
       <br>
       <br>
       Pelle Upgrades can be divided into two categories. The five upgrades in the first row can be repeatedly bought,
@@ -1805,8 +1809,8 @@ Each Pelle Strike also unlocks a Rift bar.
 <br>
 <br>
 Rift bars can be filled by clicking them to toggle between "Idle" and "Filling", although only two Rifts can be
-"Filling" at any given time. When active, Rifts consume ${formatInt(3)}% of a Rift-specific resource per second. Each
-Rift offers a Rift-specific effect which are based on the total amount filled.
+"Filling" at any given time. When active, each Rift's total amount filled instantly jumps to the current value of a
+Rift-specific resource. Each Rift offers a Rift-specific effect which are based on the total amount filled.
 ${PelleStrikes.eternity.hasStrike
     ? `An exception for this is Decay/Collapse/Disarray, whose effect gets capped once you have drained a total of
     ${formatPostBreak(DC.E2000)} Replicanti.`
@@ -1821,10 +1825,10 @@ In addition, each Rift offers three milestone rewards for filling them up to a c
       info: () => `
 When you reach ${formatInt(100)}% Recursion/Dispersion/Destruction, you unlock the <b>Galaxy Generator</b>, which can
 passively generate Galaxies. Generated Galaxies are like Replicanti Galaxies and Tachyon Galaxies in that they affect
-tickspeed as if they were Antimatter Galaxies, but they do not increase the cost of your next Antimatter Galaxy. You
-also unlock five new upgrades. The first upgrade increases the base amount of Galaxies generated. The other four
-upgrades then give a multiplier to this base amount. The first two upgrades can be bought by spending antimatter and
-Generated Galaxies. Replicanti or Tachyon Galaxies cannot be spent for purchasing those upgrades.
+tickspeed as if they were Antimatter Galaxies, but they do not increase the requirement of your next Antimatter Galaxy.
+You also unlock five new upgrades. The first upgrade increases the base amount of Galaxies generated. The other four
+upgrades then give a multiplier to this base amount. The first two upgrades can be bought using antimatter and
+Generated Galaxies. Replicanti or Tachyon Galaxies cannot be used for purchasing those upgrades.
 <br>
 <br>
 The <b>Galaxy Generator</b> has a maximum number of Galaxies it can generate, which can only be increased by draining
