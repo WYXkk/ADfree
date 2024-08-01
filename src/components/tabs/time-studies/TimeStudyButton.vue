@@ -147,6 +147,7 @@ export default {
       this.STCost = this.study.STCost;
       this.isCompleteEC = this.study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
         EternityChallenge(this.study.id).remainingCompletions === 0;
+      // fix some wording issue -- ADfree
       this.isSpecialWording = (this.study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
         !Perk.studyECRequirement.isBought && !study.wasRequirementPreviouslyMet) ||
         (this.study.type === TIME_STUDY_TYPE.DILATION && this.study.id === 6 &&
