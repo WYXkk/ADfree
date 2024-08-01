@@ -18,28 +18,30 @@ export const dilationTimeStudies = [
       return tsRequirement && ecRequirement && ttRequirement;
     }
   },
+  // The later ones' costs should be cumulative, but since it only displays 1eX, this would make
+  // players confused. So take them down to 1eX again.
   {
     id: 2,
     description: "Unlock the 5th Time Dimension",
-    cost: 1007113,
+    cost: 1000000,
     requirement: () => PlayerProgress.dilationUnlocked()
   },
   {
     id: 3,
     description: "Unlock the 6th Time Dimension",
-    cost: 11007113,
+    cost: 10000000,
     requirement: () => TimeStudy.timeDimension(5).isBought
   },
   {
     id: 4,
     description: "Unlock the 7th Time Dimension",
-    cost: 111007113,
+    cost: 100000000,
     requirement: () => TimeStudy.timeDimension(6).isBought
   },
   {
     id: 5,
     description: "Unlock the 8th Time Dimension",
-    cost: 1111007113,
+    cost: 1000000000,
     requirement: () => TimeStudy.timeDimension(7).isBought
   },
   {
@@ -47,7 +49,7 @@ export const dilationTimeStudies = [
     description: () => (Pelle.isDoomed
       ? "You cannot escape a Doomed Reality"
       : "Unlock Reality"),
-    cost: 1111007114,
+    cost: 1000000000,
     requirement: () => TimeStudy.timeDimension(8).isBought &&
       player.records.thisReality.maxEP.exponent >= 4000 &&
       (Perk.firstPerk.isBought || Achievements.preReality.every(a => a.isUnlocked)) &&

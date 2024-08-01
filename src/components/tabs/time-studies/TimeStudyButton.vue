@@ -35,6 +35,8 @@ export default {
       STCost: 0,
       eternityChallengeRunning: false,
       isCompleteEC: false,
+      isECSpecialWording: false,
+      isDilationNormalReq: false,
     };
   },
   computed: {
@@ -110,7 +112,7 @@ export default {
     },
     showDefaultCostDisplay() {
       const costCond = (this.showCost && !this.showStCost) || this.STCost === 0;
-      return !this.setup.isSmall && !this.doomedRealityStudy && costCond;
+      return !this.setup.isSmall && !this.doomedRealityStudy && costCond && !this.isDilationNormalReq;
     },
     isDisabledByEnslaved() {
       return this.study.id === 192 && Enslaved.isRunning;
@@ -145,6 +147,12 @@ export default {
       this.STCost = this.study.STCost;
       this.isCompleteEC = this.study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
         EternityChallenge(this.study.id).remainingCompletions === 0;
+      this.isSpecialWording = (this.study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
+        !Perk.studyECRequirement.isBought && !study.wasRequirementPreviouslyMet) ||
+        (this.study.type === TIME_STUDY_TYPE.DILATION && this.study.id === 6 &&
+        !Pelle.isDoomed);
+      this.isDilationNormalReq = this.study.type === TIME_STUDY_TYPE.DILATION &&
+        this.study.id === 1 && !this.study.isBought && !Perk.bypassECDilation.canBeApplied;
     },
     handleClick() {
       if (this.specialClick === null || !this.study.isBought) this.study.purchase();
@@ -186,12 +194,19 @@ export class TimeStudySetup {
   >
     <slot />
     <CostDisplay
-      v-if="showDefaultCostDisplay"
+      v-if="isSpecialWording"
+      br
+      :config="config"
+      name="Time Theorem"
+      label="and"
+    />
+    <CostDisplay
+      v-else-if="showDefaultCostDisplay"
       br
       :config="config"
       name="Time Theorem"
     />
-    <div v-else-if="!doomedRealityStudy && !isDisabledByEnslaved">
+    <div v-else-if="!doomedRealityStudy && !isDisabledByEnslaved && !isDilationNormalReq">
       Req: {{ customCostStr }}
     </div>
   </button>

@@ -241,10 +241,10 @@ export const perks = {
     id: 53,
     label: "DILR",
     family: PERK_FAMILY.DILATION,
-    description: "Remove the Eternity Challenge 11, Eternity Challenge 12, and total Time Theorem " +
-      "requirements from Time Dilation unlock.",
+    description: "Remove the Eternity Challenge 11 and 12 requirements from Time Dilation unlock, " +
+      "and lower the Time Theorem requirement to 7113.",
     automatorPoints: 5,
-    shortDescription: () => `Unlocking Dilation only requires TT`,
+    shortDescription: () => `Unlocking Dilation only requires lower TT`,
     layoutPosList: [129011, 81802, 80203, 80198, 80600, 109116],
     cost: 5,
   },

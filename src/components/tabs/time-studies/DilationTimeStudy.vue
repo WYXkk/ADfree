@@ -32,8 +32,7 @@ export default {
     requirement() {
       if (this.id === 1) {
         return `Requirement: ${formatInt(5)} EC11 and EC12 completions
-          and ${formatInt(this.maxTT)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}
-          total Time Theorems`;
+          and ${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)} Time Theorems`;
       }
       if (this.id === 6) {
         const achRows = Perk.firstPerk.isBought ? "" : ` and ${formatInt(13)} rows of Achievements`;

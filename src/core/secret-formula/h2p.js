@@ -803,8 +803,8 @@ to buy your preferred path and continue on instead of stopping completely at the
 for the Dimension split in this dialog if you have purchased the relevant Time Study.
 <br>
 <br>
-<b>Respecs:</b> A respec allows you to reset the upgrades you have in the tree to retrieve all of the Time Theorems
-spent on them. It can be done for free, but only triggers on finishing an Eternity; you cannot respec Time Studies in
+<b>Respecs:</b> A respec allows you to reset the upgrades you have in the tree, so you can choose a different path on
+the splits. It can be done for free, but only triggers on finishing an Eternity; you cannot respec Time Studies in
 the middle of an Eternity.
 <br>
 <br>
@@ -853,9 +853,8 @@ if you respec your time studies.
       name: "Time Dilation",
       info: () => `
 Time Dilation is unlocked when you purchase the Time Study to unlock it below the EC11 and EC12 studies.
-In order to purchase this Time Study, you need ${formatInt(7113)} TT with a tree that can reach
-the study, a <i>total</i> of ${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)} TT, and must have
-completed both EC11 and EC12 five times each.
+In order to purchase this Time Study, you need ${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)} TT with a tree that can reach
+the study, and must have completed both EC11 and EC12 five times each.
 <br>
 <br>
 Dilating time will start a modified Eternity, called Time Dilation, in which all of your Antimatter/Infinity/Time
@@ -1227,8 +1226,8 @@ by game speed multipliers and instead refer specifically to real time instead of
 Teresa is the first Celestial. They are unlocked by Achievement 147, which requires obtaining all Reality Upgrades.
 <br>
 <br>
-On the main screen, there is a bar with a button above it that says "Pour RM". This allows you to put your RM into the
-container for a Reality Machine multiplier. RM which has been poured into the container cannot be retrieved.
+On the main screen, there is a bar with a button above it that says "Pour RM". This allows you to fill the container based
+on your current Reality Machine, which gives a Reality Machine multiplier as long as various unlocks.
 When you reach ${format(TeresaUnlocks.run.price)} RM inside of the container, you unlock Teresa's Reality.
 <br>
 <br>
