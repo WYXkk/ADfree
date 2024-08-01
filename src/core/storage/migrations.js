@@ -420,7 +420,7 @@ export const migrations = {
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
     },
-    50: player =>{
+    50: player => {
       // since TTF is removed, check if the player has it and refund -- ADfree
       if(player.reality.perks.has(105)) {
         player.reality.perks.delete(105);
@@ -436,6 +436,10 @@ export const migrations = {
       delete player.celestials.pelle.rifts.decay.percentageSpent;
       // delete S33 completion :blob: -- ADfree
       player.secretAchievementBits[2] &= 251;
+    },
+    50.1: player => {
+      // Refund perks, fix #3 -- ADfree
+      player.reality.perkPoints = Math.clampMin(player.reality.perkPoints, player.realities);
     }
   },
 
