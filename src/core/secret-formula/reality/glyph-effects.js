@@ -123,7 +123,7 @@ export const glyphEffects = {
     isGenerated: true,
     glyphTypes: ["dilation"],
     singleDesc: "Tachyon Galaxy threshold multiplier ×{value}",
-    genericDesc: "Tachyon Galaxy cost multiplier",
+    genericDesc: "Tachyon Galaxy requirement multiplier",
     shortDesc: "TG threshold ×{value}",
     effect: (level, strength) => 1 - Math.pow(level, 0.17) * Math.pow(strength, 0.35) / 100 -
       GlyphAlteration.sacrificeBoost("dilation") / 50,
@@ -353,16 +353,16 @@ export const glyphEffects = {
     isGenerated: true,
     glyphTypes: ["power"],
     singleDesc: () => (GlyphAlteration.isAdded("power")
-      ? "Antimatter Dimension power +{value}\n[and Antimatter Galaxy cost ×]{value2}"
+      ? "Antimatter Dimension power +{value}\n[and Antimatter Galaxy requirement ×]{value2}"
       : "Antimatter Dimension power +{value}"),
     totalDesc: () => (GlyphAlteration.isAdded("power")
-      ? "Antimatter Dimension multipliers ^{value} and Antimatter Galaxy cost ×{value2}"
+      ? "Antimatter Dimension multipliers ^{value} and Antimatter Galaxy requirement ×{value2}"
       : "Antimatter Dimension multipliers ^{value}"),
     genericDesc: () => (GlyphAlteration.isAdded("power")
-      ? "Antimatter Dimensions multipliers ^x and Antimatter Galaxy cost multiplier"
+      ? "Antimatter Dimensions multipliers ^x and Antimatter Galaxy requirement multiplier"
       : "Antimatter Dimension multipliers ^x"),
     shortDesc: () => (GlyphAlteration.isAdded("power")
-      ? "AD power +{value} and AG cost ×{value2}"
+      ? "AD power +{value} and AG requirement ×{value2}"
       : "AD power +{value}"),
     effect: (level, strength) => 1.015 + Math.pow(level, 0.2) * Math.pow(strength, 0.4) / 75,
     formatEffect: x => format(x, 3, 3),

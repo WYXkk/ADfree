@@ -529,7 +529,7 @@ export const normalTimeStudies = [
     requirement: [211],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [221],
-    description: () => `Dimension Boost costs scale by another ${formatInt(2)} less`,
+    description: () => `Dimension Boost requirements scale by another ${formatInt(2)} less`,
     effect: 2
   },
   {
@@ -539,7 +539,7 @@ export const normalTimeStudies = [
     requirement: [212],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [224],
-    description: () => `Distant Galaxy cost scaling starts ${formatInt(7)} Galaxies later`,
+    description: () => `Distant Galaxy requirement scaling starts ${formatInt(7)} Galaxies later`,
     effect: 7
   },
   {
@@ -551,7 +551,7 @@ export const normalTimeStudies = [
     requiresST: [223],
     description() {
       const effect = TimeStudy(224).effectValue;
-      return `Distant Galaxy cost scaling starts ${quantifyInt("Galaxy", effect)} later
+      return `Distant Galaxy requirement scaling starts ${quantifyInt("Galaxy", effect)} later
         (${formatInt(1)} per ${formatInt(2000)} Dim Boosts)`;
     },
     effect: () => Math.floor(DimBoost.totalBoosts / 2000)

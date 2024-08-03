@@ -62,8 +62,8 @@ export const infinityChallenges = [
   {
     id: 5,
     description:
-      `buying Antimatter Dimensions 1-4 causes all cheaper AD costs to increase.
-      Buying Antimatter Dimensions 5-8 causes all more expensive AD costs to increase.`,
+      `buying Antimatter Dimensions 1-4 causes all cheaper AD requirements to increase.
+      Buying Antimatter Dimensions 5-8 causes all more expensive AD requirements to increase.`,
     goal: DC.E16500,
     isQuickResettable: true,
     reward: {

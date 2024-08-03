@@ -65,13 +65,13 @@ export const eternityChallenges = [
   },
   {
     id: 5,
-    description: () => `Antimatter Galaxy cost increase scaling starts immediately (normally at ${formatInt(100)}
-      Galaxies). Dimension Boost costs scaling is massively increased.`,
+    description: () => `Antimatter Galaxy requirement increase scaling starts immediately (normally at ${formatInt(100)}
+      Galaxies). Dimension Boost requirements scaling is massively increased.`,
     goal: DC.E750,
     pelleGoal: DC.E1400,
     goalIncrease: DC.E400,
     reward: {
-      description: "Distant Galaxy cost scaling starts later",
+      description: "Distant Galaxy requirement scaling starts later",
       effect: completions => completions * 5,
       formatEffect: value => `${formatInt(value)} AG later`
     }
@@ -80,15 +80,15 @@ export const eternityChallenges = [
     id: 6,
     // The asterisk, if present, will get replaced with strings generated from the scramble text
     description: () => {
-      if (Enslaved.isRunning) return "you *. The cost of upgrading your max Replicanti Galaxies is massively reduced.";
-      return "you cannot gain Antimatter Galaxies normally. The cost of upgrading your max Replicanti" +
+      if (Enslaved.isRunning) return "you *. The requirement of upgrading your max Replicanti Galaxies is massively reduced.";
+      return "you cannot gain Antimatter Galaxies normally. The requirement of upgrading your max Replicanti" +
               " Galaxies is massively reduced.";
     },
     goal: DC.E850,
     pelleGoal: DC.E1500,
     goalIncrease: DC.E250,
     reward: {
-      description: "Further reduce Antimatter Dimension cost multiplier growth",
+      description: "Further reduce Antimatter Dimension requirement multiplier growth",
       effect: completions => completions * 0.2,
       formatEffect: value => {
         const total = Math.round(Player.dimensionMultDecrease + Effects.sum(EternityChallenge(6).reward)) - value;
@@ -178,7 +178,7 @@ export const eternityChallenges = [
     goalIncrease: DC.E200,
     pelleGoalIncrease: DC.E1400,
     reward: {
-      description: "Further reduce Tickspeed cost multiplier growth",
+      description: "Further reduce Tickspeed requirement multiplier growth",
       effect: completions => completions * 0.07,
       formatEffect: value => {
         const total = Math.round(Player.tickSpeedMultDecrease + Effects.sum(EternityChallenge(11).reward)) - value;
@@ -201,7 +201,7 @@ export const eternityChallenges = [
     formatRestriction: restriction => `in ${quantify("in-game second", restriction, 0, 1)} or less.`,
     failedRestriction: "(Too slow for more)",
     reward: {
-      description: "Infinity Dimension cost multipliers are reduced",
+      description: "Infinity Dimension requirement multipliers are reduced",
       effect: completions => 1 - completions * 0.008,
       formatEffect: value => `x${formatPow(value, 3, 3)}`
     }
