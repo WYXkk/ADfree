@@ -157,7 +157,7 @@ export default {
       />
     </div>
     <div v-if="showLockedDimCostNote">
-      Hold shift to see the Infinity Point cost for locked Infinity Dimensions.
+      Hold shift to see the Infinity Point requirement for locked Infinity Dimensions.
     </div>
   </div>
 </template>

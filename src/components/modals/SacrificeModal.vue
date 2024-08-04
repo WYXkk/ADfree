@@ -19,7 +19,7 @@ export default {
           1st Antimatter Dimensions you had at the time of Sacrificing.`;
       }
       return `Dimensional Sacrifice will remove all of your 1st through 7th Antimatter Dimensions
-        (with the cost and multiplier unchanged), for a boost to the 8th Antimatter Dimension based on the total
+        (with the requirement and multiplier unchanged), for a boost to the 8th Antimatter Dimension based on the total
         amount of 1st Antimatter Dimensions sacrificed. It will take time to regain production.`;
     },
     multiplierText() {
