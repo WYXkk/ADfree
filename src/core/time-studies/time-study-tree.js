@@ -241,7 +241,9 @@ export class TimeStudyTree {
         return reqSatisfied && !hasForbiddenStudies;
       }
       const totalTT = player.timestudy.theorem.plus(TimeTheorems.calculateTimeStudiesCost());
-      const hasEnoughTT = totalTT.subtract(this.spentTheorems[0]).gte(study.cost);
+      // const hasEnoughTT = totalTT.subtract(this.spentTheorems[0]).gte(study.cost);
+      const hasEnoughTT = totalTT.gte(study.cost);
+      // Cost removed -- ADfree
       const secondaryGoal = Perk.studyECRequirement.isBought || study.isEntryGoalMet;
       return reqSatisfied && !hasForbiddenStudies && (study.isBought || (secondaryGoal && hasEnoughTT));
     }
@@ -257,11 +259,16 @@ export class TimeStudyTree {
       : 0;
     // Took these out of the checkCosts check as these aren't available early game
     const maxST = Pelle.isDoomed ? 0 : V.spaceTheorems;
-    const hasST = this.spentTheorems[1] + stNeeded <= maxST;
+    // const hasST = this.spentTheorems[1] + stNeeded <= maxST;
+    const hasST = stNeeded <= maxST;
+    // Cost removed -- ADfree
     if (checkCosts) {
-      const maxTT = Currency.timeTheorems.value.add(GameCache.currentStudyTree.value.spentTheorems[0])
-        .clampMax(Number.MAX_VALUE).toNumber();
-      const hasTT = this.spentTheorems[0] + config.cost <= maxTT;
+      // const maxTT = Currency.timeTheorems.value.add(GameCache.currentStudyTree.value.spentTheorems[0])
+      //   .clampMax(Number.MAX_VALUE).toNumber();
+      const maxTT = Currency.timeTheorems.value.clampMax(Number.MAX_VALUE).toNumber();
+      // const hasTT = this.spentTheorems[0] + config.cost <= maxTT;
+      const hasTT = config.cost <= maxTT;
+      // Cost removed -- ADfree
       if (!hasTT || !hasST) return;
     }
 
@@ -269,7 +276,9 @@ export class TimeStudyTree {
     if (maxST === 0 && stNeeded > 0) return;
     // this.spentTheorems[0] += config.cost;
     // this.spentTheorems[1] += stNeeded;
-    // Cost removed -- ADfree
+    this.spentTheorems[0] = Math.max(this.spentTheorems[0], config.cost);
+    this.spentTheorems[1] = Math.max(this.spentTheorems[1], stNeeded);
+    // Cost removed, replaced by max -- ADfree
 
     this.purchasedStudies.push(study);
   }

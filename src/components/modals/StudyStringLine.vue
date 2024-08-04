@@ -18,8 +18,8 @@ export default {
   },
   methods: {
     formatTheoremCost(tt, st) {
-      const strTT = `${formatWithCommas(tt)} TT`;
-      const strST = `${formatWithCommas(st)} ST`;
+      const strTT = `${tt < 0 ? "no more" : formatWithCommas(tt)} TT`;
+      const strST = `${st < 0 ? "no more" : formatWithCommas(st)} ST`;
       return st === 0 ? strTT : `${strTT} + ${strST}`;
     }
   },
@@ -28,14 +28,14 @@ export default {
 
 <template>
   <div class="l-modal-import-tree__tree-info-line">
-    <div v-if="tree.timeTheorems === 0 && tree.spaceTheorems === 0">
+    <div v-if="tree.newStudiesArray.length === 0">
       <i>Importing this {{ importDestString }} will not purchase any new Time Studies.</i>
     </div>
     <div v-else>
       Importing {{ importDestString }} will purchase:
       <br>
       {{ tree.newStudies }}
-      (Requires: {{ formatTheoremCost(tree.timeTheorems, tree.spaceTheorems) }})
+      (Requires {{ formatTheoremCost(tree.timeTheorems, tree.spaceTheorems) }})
     </div>
     <br>
   </div>
