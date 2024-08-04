@@ -54,7 +54,7 @@ export default {
       The first two rows of upgrades can be purchased endlessly and the rest of the upgrades are one-time upgrades
       with requirements.
       <br>
-      Upgrades here have the same gameplay and visual behavior as Reality Upgrades, but cost Imaginary Machines instead.
+      Upgrades here have the same gameplay and visual behavior as Reality Upgrades, but require Imaginary Machines instead.
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

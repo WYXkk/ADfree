@@ -35,7 +35,7 @@ export default {
       Importing {{ importDestString }} will purchase:
       <br>
       {{ tree.newStudies }}
-      (Cost: {{ formatTheoremCost(tree.timeTheorems, tree.spaceTheorems) }})
+      (Requires: {{ formatTheoremCost(tree.timeTheorems, tree.spaceTheorems) }})
     </div>
     <br>
   </div>
