@@ -1,6 +1,6 @@
 name: Auto publish to pages
 on:
-  workflow_dispatch
+  workflow_dispatch:
   push:
     branches: [ "master", "main" ]
   pull_request:
